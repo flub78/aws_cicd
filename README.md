@@ -14,9 +14,33 @@ The ultime goal is to get it fully automated, it should be possible from a singl
 ## Steps
 
 1. Create an EC2 instance
-  - Enable ssh access
-  - Create a key pair
-  - Install the public key of controller machine in the instance .ssh directory
-  - test ssh access
-  - create a symbolic link /usr/bin/python to /usr/bin/python3
-  - test that the controller machine can access the instance with ansible
+    - Enable ssh access
+    - Create a key pair
+    - Install the public key of controller machine in the instance .ssh directory
+    - test ssh access
+    - create a symbolic link /usr/bin/python to /usr/bin/python3
+    - test that the controller machine can access the instance with ansible
+
+1. Install Jenkins
+    - Install jenkins
+    - Install Jenkins plugins
+    - Install java
+    - test jenkins
+
+1. Install Apache
+
+1. Install MySQL
+
+1. Install PHP
+    - Install the php interpretor
+    - Install php modules
+    - Install XDebug
+    - Install Chrome Web Driver
+
+1. Create the Jenkins jobs
+    - Static Anaysis
+    - phpunit
+    - Dusk End to End tests
+    - Deployment tests
+
+
