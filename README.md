@@ -11,3 +11,12 @@ The ultime goal is to get it fully automated, it should be possible from a singl
 - Ansible installed on this machine
 - AWS cli, installed on this machine (tested withe version 2)
 
+## Steps
+
+1. Create an EC2 instance
+  - Enable ssh access
+  - Create a key pair
+  - Install the public key of controller machine in the instance .ssh directory
+  - test ssh access
+  - create a symbolic link /usr/bin/python to /usr/bin/python3
+  - test that the controller machine can access the instance with ansible
