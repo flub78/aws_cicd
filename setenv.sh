@@ -1,1 +1,1 @@
-export target=ec2-13-38-39-141.eu-west-3.compute.amazonaws.com
+export aws_jenkins=ec2-13-37-229-138.eu-west-3.compute.amazonaws.com
