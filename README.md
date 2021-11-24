@@ -49,9 +49,13 @@ The ultime goal is to get it fully automated, it should be possible from a singl
     ansible aws_jenkins -a "hostname"
     ansible aws_jenkins -a "uptime"
     # or
+    ansible-playbook ansible/test_connection.yml 
     
+    ansible-playbook ansible/dev_server.yml 
     
     
     # Set the environment variables in setenv.sh
     source setenv.sh
     bin/main.sh
+    
+

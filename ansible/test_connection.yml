@@ -7,3 +7,6 @@
 
     - name: test connection
       ping:
+
+    -name: test root access
+      command: 'grep root /etc/shadow'   
