@@ -45,6 +45,6 @@ The ultime goal is to get it fully automated, it should be possible from a singl
 
 # Execution
 
-- Set the environment variables in setenv.sh
-- source setenv.sh
-- bin/main.sh
+    # Set the environment variables in setenv.sh
+    source setenv.sh
+    bin/main.sh
