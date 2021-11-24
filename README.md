@@ -45,6 +45,13 @@ The ultime goal is to get it fully automated, it should be possible from a singl
 
 # Execution
 
+    # Test that the target is reachable
+    ansible aws_jenkins -a "hostname"
+    ansible aws_jenkins -a "uptime"
+    # or
+    
+    
+    
     # Set the environment variables in setenv.sh
     source setenv.sh
     bin/main.sh

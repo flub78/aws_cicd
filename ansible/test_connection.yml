@@ -1,0 +1,9 @@
+---
+
+- name: Network Getting Started First Playbook
+  gather_facts: true
+  hosts: aws_jenkins
+  tasks:
+
+    - name: test connection
+      ping:
