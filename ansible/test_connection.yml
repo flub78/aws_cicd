@@ -3,10 +3,14 @@
 - name: Network Getting Started First Playbook
   gather_facts: true
   hosts: aws_jenkins
+  become: yes
+  become_method: sudo
+  become_user: root
+  
   tasks:
 
     - name: test connection
       ping:
 
-    -name: test root access
+    - name: test root access
       command: 'grep root /etc/shadow'   
