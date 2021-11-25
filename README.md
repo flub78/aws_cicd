@@ -51,7 +51,7 @@ The ultime goal is to get it fully automated, it should be possible from a singl
     # or
     ansible-playbook ansible/test_connection.yml 
     
-    ansible-playbook ansible/dev_server.yml 
+    ansible-playbook ansible/aws_dev_server.yml 
     
     
     # Set the environment variables in setenv.sh

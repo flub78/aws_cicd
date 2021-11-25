@@ -6,7 +6,6 @@
   hosts: aws_jenkins
 
   become: yes
-  remote_user: frederic
   become_method: sudo
   become_user: root
 
@@ -19,18 +18,13 @@
 #    - gvv
 #    - jdk
 #    - jenkins
-    - phptools
+#    - phptools
 #     - watir
 
   pre_tasks:
 
     - name: test connection
       ping:
-      remote_user: frederic
 
     - name: test root access
       command: 'grep root /etc/shadow'
-
-    - name: include host variables
-      include_vars:
-         file: "host_vars/{{inventory_hostname_short}}.yml"
