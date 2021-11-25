@@ -1,0 +1,26 @@
+#    - name: install apache2
+#      apt: name=apache2 update_cache=no state=latest
+
+    - name: enabled mod_rewrite
+      apache2_module: name=rewrite state=present
+      notify:
+        - restart apache2
+
+    - name: start httpd
+      service: name=apache2 state=started
+
+# a step has not been automated, but this ansible role is executed
+# on the server on which apache is installed
+# so the DNS resolution must match localhost.
+# Currently file /etc/hosts has been manually modified.
+ 
+    - name: check that the server can be reached
+      uri:
+        url: "http://{{inventory_hostname}}"
+        follow_redirects: yes
+
+    - name:  check that the server can be reached
+      get_url:
+        url:  "http://{{inventory_hostname}}"
+        dest: /tmp/index.html
+        timeout: 30
