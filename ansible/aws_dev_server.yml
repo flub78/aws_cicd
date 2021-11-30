@@ -10,7 +10,8 @@
   become_user: root
 
   roles:
-    - apache
+    - check_access
+#    - apache
 #    - https
 #    - mysql
 #    - ftp
@@ -25,6 +26,3 @@
 
     - name: test connection
       ping:
-
-    - name: test root access
-      command: 'grep root /etc/shadow'

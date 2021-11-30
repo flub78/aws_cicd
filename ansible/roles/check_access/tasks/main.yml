@@ -1,0 +1,2 @@
+    - name: Check host root access
+      command: 'grep root /etc/shadow'    
