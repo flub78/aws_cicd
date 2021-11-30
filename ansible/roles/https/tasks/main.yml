@@ -1,0 +1,10 @@
+    - name: install certbot using apt
+      apt:
+        name: python-certbot-apache
+        state: present
+
+# sudo certbot --apache -d example.com -d www.example.com
+# Does not work the process is interactive
+# I need a way to supply the parameters (to be fixed later)
+#    - name: generate certificate
+#      command: certbot --apache -d flub78.ddns.net
