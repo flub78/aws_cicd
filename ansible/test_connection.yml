@@ -2,7 +2,7 @@
 
 - name: Network Getting Started First Playbook
   gather_facts: true
-  hosts: aws_jenkins
+  hosts: aws_jenkins2
   become: yes
   become_method: sudo
   become_user: root
