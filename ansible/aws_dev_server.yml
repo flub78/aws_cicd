@@ -10,7 +10,7 @@
   become_user: root
 
   roles:
-#    - apache
+    - apache
 #    - https
 #    - mysql
 #    - ftp
