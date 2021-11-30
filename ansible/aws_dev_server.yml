@@ -11,8 +11,8 @@
 
   roles:
     - check_access
-#    - apache
-#    - https
+    - apache
+    - https
     - mysql
 #    - ftp
 #    - php
