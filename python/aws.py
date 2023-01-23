@@ -9,22 +9,89 @@ The basic scripts handle a simple resource (key pair, EC2 instance, etc.).
 The scripts are able to list, create and delete the resources.
 """
 import argparse
+import os
+import boto3
 
 description="aws python template"
 resource='key_pair'
+basename = os.environ.get('BASENAME')
 
+ec2 = boto3.resource('ec2')
+ec2_client = boto3.client('ec2')
+
+filename = 'ec2-keypair.pem'
+keyname = 'ec2-keypair'
+if basename:
+    filename = basename + '_' + filename
+    keyname = basename + '_' + keyname
+
+# Parsing of the CLI arguments
 parser = argparse.ArgumentParser(description=description)
 
-parser.add_argument('--list', dest='action', action='store_const',
-                    const=list,
-                    help='list the ' + resource)
+group = parser.add_mutually_exclusive_group()
+group.add_argument('-l', '--list', action='store_true', help='list the ' + resource)
+group.add_argument('-c', '--create', action='store_true', help='create a ' + resource)
+group.add_argument('-d', '--delete', action='store_true', help='delete a ' + resource)
 
-parser.add_argument('--create', dest='action', action='store_const',
-                    const=create,
-                    help='create a ' + resource)
+parser.add_argument('-v', '--verbose', action='store_true', help='verbose mode')
+parser.add_argument('--int', type=int, help='an integer value')
+parser.add_argument('--float', type=float, help='a float value')
+parser.add_argument('-i', '--instance', type=str, help='EC2 instance ID')
+parser.add_argument('-n', '--name', type=str, help='name of the ' + resource + ' to create')
+parser.add_argument('--bool', type=bool, help='a boolean value')
 
 args = parser.parse_args()
 
-print (description)
-print('args = ')
-print (args)
+###################################################
+def list():
+    """ list all the resources """
+    if args.verbose:
+        print ('list the ' + resource)
+    response = ec2_client.describe_key_pairs()
+    # print(response)
+    for key_pair in response['KeyPairs']:
+        print(key_pair['KeyName'], key_pair['KeyPairId'], key_pair['KeyType'])
+
+
+def create():
+    """ create a resource """
+   
+    if args.verbose:
+        print ('creating ' + resource + ' ' + keyname)
+
+    # create a file to store the key locally
+    outfile = open(filename,'w')
+
+    # call the boto ec2 function to create a key pair
+    key_pair = ec2.create_key_pair(KeyName=keyname)
+
+    # capture the key and store it in a file
+    KeyPairOut = str(key_pair.key_material)
+    if args.verbose:
+        print(KeyPairOut)
+    outfile.write(KeyPairOut)   
+
+def delete():
+    """ delete a resource """
+    if args.verbose:
+        print ('delete ' + resource, keyname)
+    response = ec2_client.delete_key_pair(KeyName=keyname)
+    # print(response)
+
+###################################################
+# Main processing
+
+# print('args = ')
+# print (args)
+
+if args.list:
+    list()    
+
+if args.create:
+    create()
+
+if args.delete:
+    delete()
+
+if args.instance:
+    print ('instance = ' + args.instance)
