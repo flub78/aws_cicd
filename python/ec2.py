@@ -9,6 +9,7 @@ The scripts are able to list, create and delete EC2 instances.
 import argparse
 import os
 import boto3
+import json
 
 description="aws EC2 instances management"
 resource='ec2_instance'
@@ -22,8 +23,10 @@ jenkins_7="ami-0e019d7e4645e931d"
 ami=amazon_linux_2
 
 keyname = 'ec2-keypair'
+instancename = 'ec2-i'
 if basename:
     keyname = basename + '_' + keyname
+    instancename = basename + '_' + instancename
 
 # Parsing of the CLI arguments
 parser = argparse.ArgumentParser(description=description)
@@ -38,6 +41,7 @@ parser.add_argument('--int', type=int, help='an integer value')
 parser.add_argument('--float', type=float, help='a float value')
 parser.add_argument('-i', '--instance', type=str, help='EC2 instance ID')
 parser.add_argument('-n', '--name', type=str, help='name of the ' + resource + ' to create')
+parser.add_argument('-f', '--filter', type=str, help='process only the matching strings')
 parser.add_argument('--bool', type=bool, help='a boolean value')
 
 args = parser.parse_args()
@@ -53,10 +57,26 @@ def list():
     # Iterate through each instance and print its ID
     for reservation in response['Reservations']:
         for instance in reservation['Instances']:
-            print(instance['InstanceId'], instance['ImageId'], instance['InstanceType'],
-                instance['State']['Name'],
-                instance['Placement']['AvailabilityZone'], 
-                instance['PublicDnsName'])
+            # json_string = json.dumps(instance, indent=2, default=str)
+            # print(json_string)
+
+            str = ''
+            if 'Tags' in instance:
+                for tag in instance['Tags']:
+                    if (tag['Key'] == 'Name'):
+                        str = tag['Value'] + ' '
+
+            str += instance['InstanceId'] + ' '
+            str += instance['ImageId'] + ' '
+            str += instance['InstanceType'] + ' '
+            str += instance['State']['Name'] + ' '
+            str += instance['Placement']['AvailabilityZone'] + ' '
+            str += instance['PublicDnsName'] + ' '
+            if (args.filter):
+                if args.filter in str:
+                    print(str)
+            else:
+                print(str)
 
 def create():
     """ create a resource """
@@ -70,7 +90,17 @@ def create():
         MinCount=1,
         MaxCount=1,
         InstanceType='t2.micro',
-        KeyName=keyname
+        KeyName=keyname,
+        SecurityGroupIds=['sg-0b864f5c5c2ceb714'],
+        TagSpecifications=[{
+            'ResourceType': 'instance',
+            'Tags': [
+                {
+                    'Key': 'Name',
+                    'Value': instancename
+                },
+            ]
+        }]
     )
 
 def delete():
