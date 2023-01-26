@@ -23,8 +23,12 @@ The principle is config as code https://www.octopus.com/blog/config-as-code-what
 
 ## Table of content
 
+- [Introduction](introduction.md) 
+  
 - AWS
   - [AWS CLI](aws_cli.md)
   - [Using Python and boto3 to manage AWS objects](python_boto3.md)
 
-- [Ansible](ansible.md) 
+- [Ansible](ansible.md)
+
+- [Step by step creation and population of an EC2 instance](step_by_step.md)
