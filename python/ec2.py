@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 # -*- coding:utf8 -*
 
 """
@@ -22,7 +22,11 @@ ec2_client = boto3.client('ec2')
 
 amazon_linux_2="ami-0cc814d99c59f3789"
 jenkins_7="ami-0e019d7e4645e931d"
-ami=amazon_linux_2
+ubuntu="ami-0afd55c0c8a52973a"
+ami=ubuntu
+
+instancetype='t2.micro'
+sg='sg-0b864f5c5c2ceb714'
 
 keyname = 'ec2-keypair'
 instancename = 'ec2-i'
@@ -49,6 +53,8 @@ parser.add_argument('-i', '--instance', type=str, help='EC2 instance ID')
 parser.add_argument('-n', '--name', type=str, help='name of the ' + resource + ' to create')
 parser.add_argument('-f', '--filter', type=str, help='process only the matching strings')
 parser.add_argument('-k', '--keypair', type=str, help='keypair to use')
+parser.add_argument('-t', '--type', type=str, help='instance type')
+parser.add_argument('-a', '--ami', type=str, help='image')
 # parser.add_argument('--bool', type=bool, help='a boolean value')
 
 args = parser.parse_args()
@@ -124,9 +130,9 @@ def create():
         ImageId=ami,
         MinCount=1,
         MaxCount=1,
-        InstanceType='t2.micro',
+        InstanceType=instancetype,
         KeyName=keyname,
-        SecurityGroupIds=['sg-0b864f5c5c2ceb714'],
+        SecurityGroupIds=[sg],
         TagSpecifications=[{
             'ResourceType': 'instance',
             'Tags': [
@@ -147,9 +153,8 @@ def delete():
     if args.verbose:
         print ('deleting ' + resource, args.instance)
 
-    ec2.instances.filter(InstanceIds = args.instance).terminate()
-    # ec2.stop_instances(InstanceIds=args.instance)
-    # ec2.start_instances(InstanceIds=args.instance)
+    ec2.instances.filter(InstanceIds = [args.instance]).terminate()
+ 
 
 def resume(id):
     """ resume an ec2 instance """

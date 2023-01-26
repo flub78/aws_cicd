@@ -58,6 +58,9 @@ def list():
     # print(response)
     for key_pair in response['KeyPairs']:
         print(key_pair['KeyName'], key_pair['KeyPairId'], key_pair['KeyType'])
+        json_string = json.dumps(key_pair, indent=2, default=str)
+        print(json_string)
+        print()
 
 
 def create():

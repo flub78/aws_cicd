@@ -44,7 +44,29 @@ On pastille
 
 ### Ansible
 
-    To be completed
+    sudo apt-get update
+    sudo apt install ansible-core
+
+    ansible --version
+    ansible [core 2.12.0]
+        config file = None
+        configured module search path = ['/home/frederic/.ansible/plugins/modules', '/usr/share/ansible/plugins/modules']
+        ansible python module location = /usr/lib/python3/dist-packages/ansible
+        ansible collection location = /home/frederic/.ansible/collections:/usr/share/ansible/collections
+        executable location = /usr/bin/ansible
+        python version = 3.10.6 (main, Nov 14 2022, 16:10:14) [GCC 11.3.0]
+        jinja version = 3.0.3
+        libyaml = True
+
+#### First communication with an EC2 instance
+
+create the file /etc/ansible/hosts on the control host
+
+and fill it
+cat /etc/ansible/hosts
+[jenkins]
+        ubuntu@flub78.net
+
 
 # Architecture
 
@@ -152,6 +174,43 @@ To create in instance I need:
     sudo apt install python3-pip
 
     Create a User and get AWS Access ID and Secret Key
+
+## Python scripts
+
+    aws.py          a template with the most usual parameters
+    key_pair.py     manages key pairs
+    ec2.py          manages ec2 instances
+    
+# connecting to an instance
+
+Once an instance is up and running, it has been associated to a key pair and to a security group allowing ssh access it is possible to log on the instance.
+
+    ssh -i ratus_ec2-keypair.pem ec2-user@ec2-35-180-138-100.eu-west-3.compute.amazonaws.com
+
+    To connect to the instance using a domain name you need:
+        - an AWS Elastic IP address must be associated to the instance
+        - A S3 route to associate the domain and the the elastic IP address.
+
+    once done it is possible to connect to the instance using the domain:
+
+        ssh -i ratus_ec2-keypair.pem ubuntu@flub78.net hostname
+            ip-172-31-32-114
+
+## Installation of my public key to the managed nodes
+
+    ssh-keygen -t rsa -b 4096 -C "frederic.peignot@free.fr"
+
+    cat ~/.ssh/id_rsa.pub
+
+    and copy it into .ssh/authorized_keys on the managed nodes
+
+    it is then possible to type directly
+        ssh ubuntu@flub78.net uptime
+
+
+
+
+
 
     
 
