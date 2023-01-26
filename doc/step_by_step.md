@@ -18,29 +18,7 @@ If possible it should work on old Linux machine or limited environments like Ras
 
 ## Tools and Technologies
 
-### AWS CLI
 
-#### Installation the version of a linux disttribution
-
-    sudo apt-get update
-    sudo apt install awscli
-
-On WSL
-    frederic@LAPTOP-57QER3OP:~$ aws --version
-    aws-cli/1.22.34 Python/3.10.6 Linux/5.15.79.1-microsoft-standard-WSL2 botocore/1.23.34
-
-On pastille
-
-    frederic@pastille:~/cicd$ aws --version
-    aws-cli/1.18.69 Python/3.6.9 Linux/4.15.0-54-generic botocore/1.16.19
-
-#### Installation of the latest version
-
-    https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
-
-#### AWS CLI documentation
-
-    https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html#synopsis
 
 ### Ansible
 
@@ -67,6 +45,14 @@ cat /etc/ansible/hosts
 [jenkins]
         ubuntu@flub78.net
 
+ansible all -m ping
+ubuntu@flub78.net | SUCCESS => {
+    "ansible_facts": {
+        "discovered_interpreter_python": "/usr/bin/python3"
+    },
+    "changed": false,
+    "ping": "pong"
+}
 
 # Architecture
 

@@ -23,4 +23,7 @@ The principle is config as code https://www.octopus.com/blog/config-as-code-what
 
 ## Table of content
 
- [Jenkins](jenkins.md)
+- [Jenkins](jenkins.md)
+- AWS
+  - [AWS CLI](aws_cli.md)
+  - [Using Python and boto3 to manage AWS objects](python_boto3.md) 
