@@ -82,7 +82,9 @@ def delete():
 
 # print('args = ')
 # print (args)
-
+if args.name:
+    keyname = args.name
+    filename = keyname + '.pem'
 if args.list:
     list()    
 

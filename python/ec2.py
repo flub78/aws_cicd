@@ -5,6 +5,8 @@
 AWS EC2 instances management.
 
 The scripts are able to list, create and delete EC2 instances.
+
+TODO:   support of delete with instance name
 """
 import argparse
 import os
