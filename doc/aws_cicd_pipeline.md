@@ -10,20 +10,14 @@ I have spent quite a lot of time to develop these infrastructure but even if par
 
 So the objective of this project is to build a fully automated CI/CD pipeline able to validate Laravel or ANdroid projects. Not only the application test and deployment had to be automatic once initialized, but the creation of the test and validation infrastructure has to be automatic. So in case of issues with my CI/CD pipeline I should be able to create a new one with just one command. Even if these scripts become obsolete this project is a full documentation and it should be easy to update it and start again.
 
-The technologies chosen for that are:
-* AWS to deploy virtual machines and virtual networks
-* Python 3 and boto3 to manage AWS object from a set of scripts
-* ansible to populate the virtual machines
-* jenkins as automation server https://www.jenkins.io/
-* github to manage the scripts
 
-Of course these tools make sense in 2023, but maybe that they will be replaced in the futur by more convenient ones. It is the CI/CD spirit which is important, not the tools.
 
-The principle is config as code https://www.octopus.com/blog/config-as-code-what-is-it-how-is-it-beneficial. 
+The principle is infrastructure as code https://www.youtube.com/watch?v=POPP2WTJ8es
 
 ## Table of content
 
 - [Introduction](introduction.md) 
+- [Tools](tools.md)
   
 - AWS
   - [AWS CLI](aws_cli.md)
@@ -32,3 +26,6 @@ The principle is config as code https://www.octopus.com/blog/config-as-code-what
 - [Ansible](ansible.md)
 
 - [Step by step creation and population of an EC2 instance](step_by_step.md)
+
+- [CI/CD Architecture](architecture.md)
+

@@ -9,6 +9,8 @@ The scripts are able to list, create and delete key pairs.
 import argparse
 import os
 import boto3
+from lib.hello import *
+from lib.aws import *
 
 description="aws key pairs management"
 resource='key_pair'
@@ -32,22 +34,20 @@ group.add_argument('-c', '--create', action='store_true', help='create a ' + res
 group.add_argument('-d', '--delete', action='store_true', help='delete a ' + resource)
 
 parser.add_argument('-v', '--verbose', action='store_true', help='verbose mode')
-parser.add_argument('--int', type=int, help='an integer value')
-parser.add_argument('--float', type=float, help='a float value')
+# parser.add_argument('--int', type=int, help='an integer value')
+# parser.add_argument('--float', type=float, help='a float value')
 parser.add_argument('-i', '--instance', type=str, help='EC2 instance ID')
 parser.add_argument('-n', '--name', type=str, help='name of the ' + resource + ' to create')
-parser.add_argument('--bool', type=bool, help='a boolean value')
+parser.add_argument('-f', '--filter', type=str, help='process only the matching strings')
+# parser.add_argument('--bool', type=bool, help='a boolean value')
 
 args = parser.parse_args()
 
 ###################################################
 def list():
-    """ list all the resources """
-    if args.verbose:
-        print ('list the ' + resource)
-    response = ec2_client.describe_key_pairs()
-    # print(response)
-    for key_pair in response['KeyPairs']:
+    """ list all the resources """    
+    list = key_pair_list(args.verbose)
+    for key_pair in list:
         print(key_pair['KeyName'], key_pair['KeyPairId'], key_pair['KeyType'])
 
 
@@ -74,6 +74,7 @@ def delete():
     if args.verbose:
         print ('delete ' + resource, keyname)
     response = ec2_client.delete_key_pair(KeyName=keyname)
+    # response = ec2_client.delete_key_pair(KeyPairId='string')
     # print(response)
     os.remove(filename) 
 
@@ -96,3 +97,5 @@ if args.delete:
 
 if args.instance:
     print ('instance = ' + args.instance)
+
+# print (hello(basename))
