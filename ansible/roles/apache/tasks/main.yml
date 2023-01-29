@@ -1,6 +1,11 @@
     - name: install apache2
       apt: name=apache2 update_cache=yes state=latest
 
+    - name: enable mod_rewrite in apache.
+      shell: "a2enmod rewrite"
+      register: a2enmodrewrite
+      changed_when: "'already enabled' not in a2enmodrewrite.stdout"
+      
 #    - name: Enable the Apache2 module rewrite
 #      community.general.apache2_module: name=rewrite state=present
 
@@ -8,11 +13,9 @@
 #      apache2_module: 
 #        name: rewrite
 #        state: present
-#      notify:
-#        - restart apache2
 
-    - name: start httpd
-      service: name=apache2 state=started
+#    - name: start httpd
+#      service: name=apache2 state=started
 
 # a step has not been automated, but this ansible role is executed
 # on the server on which apache is installed
