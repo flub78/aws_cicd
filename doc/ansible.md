@@ -33,3 +33,16 @@ ubuntu@flub78.net | SUCCESS => {
     "changed": false,
     "ping": "pong"
 }
+
+ansible-playbook jenkins test_connection.yml
+
+## Ansible vault
+
+Some files containing private data are encrypted.
+
+They can be modified that way:
+    ansible-vault edit roles/apache/vars/main.yml
+
+The ansible vault password can be store in a file
+
+ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server.yml

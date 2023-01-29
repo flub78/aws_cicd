@@ -3,7 +3,7 @@
 - name: Installing a development server
 
   gather_facts: true
-  hosts: aws_jenkins2
+  hosts: jenkins
 
   become: yes
   become_method: sudo
@@ -12,7 +12,7 @@
   roles:
     - check_access
     - apache
-    - https
+#    - https
 #    - mysql
 #    - ftp
 #    - php
