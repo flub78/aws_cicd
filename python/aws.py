@@ -11,8 +11,7 @@ The scripts are able to list, create and delete the resources.
 import argparse
 import os
 import boto3
-import json
-
+from lib.aws import *
 
 description="aws python template"
 resource='key_pair'
@@ -37,31 +36,25 @@ group.add_argument('-d', '--delete', action='store_true', help='delete a ' + res
 group.add_argument('-s', '--stop', action='store_true', help='stop an ' + resource)
 group.add_argument('-r', '--resume', action='store_true', help='restart an ' + resource)
 
-parser.add_argument('-v', '--verbose', action='store_true', help='verbose mode')
 # parser.add_argument('--int', type=int, help='an integer value')
 # parser.add_argument('--float', type=float, help='a float value')
-parser.add_argument('-i', '--instance', type=str, help='EC2 instance ID')
+# parser.add_argument('--bool', type=bool, help='a boolean value')
+parser.add_argument('-v', '--verbose', action='store_true', help='verbose mode')
+parser.add_argument('-i', '--id', type=str, help='EC2 instance ID')
 parser.add_argument('-n', '--name', type=str, help='name of the ' + resource + ' to create')
 parser.add_argument('-f', '--filter', type=str, help='process only the matching strings')
 parser.add_argument('-k', '--keypair', type=str, help='keypair to use')
+parser.add_argument('-t', '--test', action='store_true', help='test mode')
 
-# parser.add_argument('--bool', type=bool, help='a boolean value')
 
 args = parser.parse_args()
 
 ###################################################
 def list():
     """ list all the resources """
-    if args.verbose:
-        print ('list the ' + resource)
-    response = ec2_client.describe_key_pairs()
-    # print(response)
-    for key_pair in response['KeyPairs']:
+    list = key_pair_list(args.verbose, args.filter)
+    for key_pair in list:
         print(key_pair['KeyName'], key_pair['KeyPairId'], key_pair['KeyType'])
-        json_string = json.dumps(key_pair, indent=2, default=str)
-        print(json_string)
-        print()
-
 
 def create():
     """ create a resource """
@@ -86,13 +79,9 @@ def delete():
     if args.verbose:
         print ('delete ' + resource, keyname)
     response = ec2_client.delete_key_pair(KeyName=keyname)
-    # print(response)
 
 ###################################################
 # Main processing
-
-# print('args = ')
-# print (args)
 
 if args.list:
     list()    
@@ -103,5 +92,8 @@ if args.create:
 if args.delete:
     delete()
 
-if args.instance:
-    print ('instance = ' + args.instance)
+if args.id:
+    print ('id = ' + args.id)
+
+if args.test:
+    print(key_pair_select_ids(name=args.name, id=args.id, filter=args.filter))
