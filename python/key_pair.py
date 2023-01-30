@@ -7,23 +7,11 @@ AWS key pairs management.
 The scripts are able to list, create and delete key pairs.
 """
 import argparse
-import os
-import boto3
-from lib.hello import *
 from lib.aws import *
+from lib.aws_key_pair import *
 
 description="aws key pairs management"
 resource='key_pair'
-basename = os.environ.get('BASENAME')
-
-ec2 = boto3.resource('ec2')
-ec2_client = boto3.client('ec2')
-
-filename = 'ec2-keypair.pem'
-keyname = 'ec2-keypair'
-if basename:
-    filename = basename + '_' + filename
-    keyname = basename + '_' + keyname
 
 # Parsing of the CLI arguments
 parser = argparse.ArgumentParser(description=description)
@@ -34,58 +22,31 @@ group.add_argument('-c', '--create', action='store_true', help='create a ' + res
 group.add_argument('-d', '--delete', action='store_true', help='delete a ' + resource)
 
 parser.add_argument('-v', '--verbose', action='store_true', help='verbose mode')
-# parser.add_argument('--int', type=int, help='an integer value')
-# parser.add_argument('--float', type=float, help='a float value')
-parser.add_argument('-i', '--instance', type=str, help='EC2 instance ID')
+parser.add_argument('-i', '--id', type=str, help='Key pair ID')
 parser.add_argument('-n', '--name', type=str, help='name of the ' + resource + ' to create')
 parser.add_argument('-f', '--filter', type=str, help='process only the matching strings')
-# parser.add_argument('--bool', type=bool, help='a boolean value')
 
 args = parser.parse_args()
 
 ###################################################
 def list():
     """ list all the resources """    
-    list = key_pair_list(args.verbose)
+    list = key_pair_list(args.verbose, args.filter)
     for key_pair in list:
         print(key_pair['KeyName'], key_pair['KeyPairId'], key_pair['KeyType'])
 
 
 def create():
     """ create a resource """
-   
-    if args.verbose:
-        print ('creating ' + resource + ' ' + keyname)
-
-    # create a file to store the key locally
-    outfile = open(filename,'w')
-
-    # call the boto ec2 function to create a key pair
-    key_pair = ec2.create_key_pair(KeyName=keyname)
-
-    # capture the key and store it in a file
-    KeyPairOut = str(key_pair.key_material)
-    if args.verbose:
-        print(KeyPairOut)
-    outfile.write(KeyPairOut)   
+    key_pair_create(name=args.name, verbose=args.verbose)
 
 def delete():
-    """ delete a resource """
-    if args.verbose:
-        print ('delete ' + resource, keyname)
-    response = ec2_client.delete_key_pair(KeyName=keyname)
-    # response = ec2_client.delete_key_pair(KeyPairId='string')
-    # print(response)
-    os.remove(filename) 
+    ids = key_pair_select_ids(verbose=args.verbose, name=args.name, id=args.id, filter=args.filter)
+    key_pair_delete(ids, args.verbose)
 
 ###################################################
 # Main processing
 
-# print('args = ')
-# print (args)
-if args.name:
-    keyname = args.name
-    filename = keyname + '.pem'
 if args.list:
     list()    
 
@@ -94,8 +55,3 @@ if args.create:
 
 if args.delete:
     delete()
-
-if args.instance:
-    print ('instance = ' + args.instance)
-
-# print (hello(basename))

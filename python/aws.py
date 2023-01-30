@@ -9,22 +9,11 @@ The basic scripts handle a simple resource (key pair, EC2 instance, etc.).
 The scripts are able to list, create and delete the resources.
 """
 import argparse
-import os
-import boto3
 from lib.aws import *
+from lib.aws_key_pair import *
 
 description="aws python template"
 resource='key_pair'
-basename = os.environ.get('BASENAME')
-
-ec2 = boto3.resource('ec2')
-ec2_client = boto3.client('ec2')
-
-filename = 'ec2-keypair.pem'
-keyname = 'ec2-keypair'
-if basename:
-    filename = basename + '_' + filename
-    keyname = basename + '_' + keyname
 
 # Parsing of the CLI arguments
 parser = argparse.ArgumentParser(description=description)
@@ -58,27 +47,11 @@ def list():
 
 def create():
     """ create a resource """
-   
-    if args.verbose:
-        print ('creating ' + resource + ' ' + keyname)
-
-    # create a file to store the key locally
-    outfile = open(filename,'w')
-
-    # call the boto ec2 function to create a key pair
-    key_pair = ec2.create_key_pair(KeyName=keyname)
-
-    # capture the key and store it in a file
-    KeyPairOut = str(key_pair.key_material)
-    if args.verbose:
-        print(KeyPairOut)
-    outfile.write(KeyPairOut)   
+    key_pair_create(name=args.name, verbose=args.verbose)
 
 def delete():
-    """ delete a resource """
-    if args.verbose:
-        print ('delete ' + resource, keyname)
-    response = ec2_client.delete_key_pair(KeyName=keyname)
+    ids = key_pair_select_ids(verbose=args.verbose, name=args.name, id=args.id, filter=args.filter)
+    key_pair_delete(ids, args.verbose)
 
 ###################################################
 # Main processing
@@ -91,9 +64,3 @@ if args.create:
 
 if args.delete:
     delete()
-
-if args.id:
-    print ('id = ' + args.id)
-
-if args.test:
-    print(key_pair_select_ids(name=args.name, id=args.id, filter=args.filter))
