@@ -8,55 +8,14 @@ The ultime goal is to get it fully automated, it should be possible from a singl
 
 ## Prerequisites
 
-- a machine to control the creation and installation of the pipeline. Typically a Linux machine, for example an EC2 instance
+- a control node to create an populate the infrastructure. It is typically a Linux machine, or the Windows Linux sub-system.
 - Ansible installed on this machine
-- AWS cli, installed on this machine (tested withe version 2)
+- AWS cli, installed on this machine (tested with version 2)
+- python and boto3 installed on the control node.
 
-## Steps
+## Getting started
 
-1. Create an EC2 instance
-    - Enable ssh access
-    - Create a key pair
-    - Install the public key of controller machine in the instance .ssh directory
-    - test ssh access
-    - create a symbolic link /usr/bin/python to /usr/bin/python3
-    - test that the controller machine can access the instance with ansible
+- [AWS CI/CD pipeline](doc/aws_cicd_pipeline.md)
+- [Step by step CI/CD Pipeline creation](doc/step_by_step.md)
 
-1. Install Jenkins
-    - Install jenkins
-    - Install Jenkins plugins
-    - Install java
-    - test jenkins
-
-1. Install Apache
-
-1. Install MySQL
-
-1. Install PHP
-    - Install the php interpretor
-    - Install php modules
-    - Install XDebug
-    - Install Chrome Web Driver
-
-1. Create the Jenkins jobs
-    - Static Anaysis
-    - phpunit
-    - Dusk End to End tests
-    - Deployment tests
-
-# Execution
-
-    # Test that the target is reachable
-    ansible aws_jenkins -a "hostname"
-    ansible aws_jenkins -a "uptime"
-    # or
-    ansible-playbook ansible/test_connection.yml 
-    
-    ansible-playbook ansible/aws_dev_server.yml 
-    
-    
-    # Set the environment variables in setenv.sh
-    source setenv.sh
-    bin/main.sh
-    
 
