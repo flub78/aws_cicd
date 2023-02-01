@@ -1,6 +1,13 @@
-#    Commented out update issue, some servers not reachable
     - name: install mysql
-      apt: name=['mysql-server', 'mysql-client', 'python-mysqldb', 'libmysqlclient-dev'] state=present update_cache=yes
+      apt:
+        pkg:
+          - mysql-server
+          - mysql-client
+          - libmysqlclient-dev
+        state: present
+        update_cache: true
+
+#      apt: name=['mysql-server', 'mysql-client', 'python-mysqldb', 'libmysqlclient-dev'] state=present update_cache=yes
 
 #    - name: Update MySQL root password for all root accounts
 #      mysql_user: name=root host={{ item }} password={{ mysql_root_pass }} state=present

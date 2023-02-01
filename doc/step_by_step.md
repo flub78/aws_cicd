@@ -14,7 +14,7 @@ Even if the goa is to become 100 % automated and scripted, the first version of 
 
     ./key_pair.py -v -c --name mina_keypair
 
-This create the keypair in the cloud and store the private key in a file named
+This create the keypair in the cloud and store the private key in a file named mina_keypair.pem
 
 The existing keys can be listed with
 

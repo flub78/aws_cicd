@@ -46,3 +46,13 @@ They can be modified that way:
 The ansible vault password can be store in a file
 
 ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server.yml
+
+## Ansible roles
+
+- check_access is just a role to test the connection and capacity to act as root.
+- apache install an HTTP server
+- https configure apache to support HTTPS
+- mysql insall a database
+- php install the php environment
+- php_tools install the static analyzer
+- jenkins install jenkins and its modules

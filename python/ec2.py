@@ -46,12 +46,18 @@ if args.list:
 
 if args.create:
     ec2_create(name=args.name, keyname=args.keypair, verbose=args.verbose)
+    ids = ec2_select_ids(verbose=args.verbose, name=args.name, id=args.id, filter=args.filter)
+    ec2_print_list(ids, args.verbose)
+
 
 if args.delete:
     ec2_delete(ids, args.verbose)
+    ec2_print_list(ids, args.verbose)
 
 if args.resume:
     ec2_resume(ids, args.verbose)
+    ec2_print_list(ids, args.verbose)
 
 if args.stop:
     ec2_stop(ids, args.verbose)
+    ec2_print_list(ids, args.verbose)
