@@ -1,0 +1,3 @@
+apache_conf_file: /etc/apache2/sites-available/default-ssl.conf
+ssl_cert_file: /etc/ssl/certs/ssl.crt
+ssl_key_file: /etc/ssl/private/ssl.key
