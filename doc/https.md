@@ -135,7 +135,7 @@ Here's what each of the options does:
 
 After running the above command, certbot will generate a certificate for the specified domain(s) and store it in `/etc/letsencrypt/live/`.
 
-write a cron job to renew a certbot certificate
+## A cron job to renew a certbot certificate
 
 Here is an example of a cron job to renew a certbot certificate:
 

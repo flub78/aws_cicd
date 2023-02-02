@@ -2,13 +2,18 @@
 
 This is an example of creation and population of an EC2 instance.
 
-## Pre-conditions
+## Pre-conditions and pre-requisites
 
-Even if the goa is to become 100 % automated and scripted, the first version of this script will be base on the following assumption.
+Even if the goal is to become 100 % automated and scripted, the first version of this script will is based on the following assumption.
 
 - the AMI is hardcoded in the script
 - there is an existing security group allowing ssh access and HTTP and HTTPS requests
 
+### Environment variables
+
+The environment variables to control the CI/CD creation are defined in the setenv.sh file.
+
+Secrets and credential must be stored outside of the github project or kept encrypted in the Ansible vault.
 
 ## Creation of a key pair
 

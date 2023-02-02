@@ -4,6 +4,7 @@
 
     sudo apt-get update
     sudo apt install ansible-core
+    sudo apt install ansible
 
     ansible --version
     ansible [core 2.12.0]

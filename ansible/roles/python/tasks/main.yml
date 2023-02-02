@@ -1,0 +1,10 @@
+    - name: install pip
+      apt: 
+        pkg:
+          - pip
+#          - python3-dnf
+      
+#    - name: Install pip modules
+#      pip:
+#        name: dnf
+

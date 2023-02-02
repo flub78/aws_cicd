@@ -10,10 +10,11 @@
   become_user: root
 
   roles:
-    - check_access
+#    - check_access
     - apache
+    - python
     - https
-    - mysql
+#    - mysql
 #    - ftp
 #    - php
 #    - gvv

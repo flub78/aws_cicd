@@ -1,2 +1,11 @@
     - name: Check host root access
-      command: 'grep root /etc/shadow'    
+      command: 'grep root /etc/shadow'
+
+    - name: Check if root access is possible
+      become: yes
+      command: whoami
+      register: result
+
+    - name: Display result
+      debug:
+        msg: "Root access is possible: user={{ result.stdout }}"

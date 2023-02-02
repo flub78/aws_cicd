@@ -5,17 +5,6 @@
       shell: "a2enmod rewrite"
       register: a2enmodrewrite
       changed_when: "'already enabled' not in a2enmodrewrite.stdout"
-      
-#    - name: Enable the Apache2 module rewrite
-#      community.general.apache2_module: name=rewrite state=present
-
-#    - name: enable rewrite module
-#      apache2_module: 
-#        name: rewrite
-#        state: present
-
-#    - name: start httpd
-#      service: name=apache2 state=started
 
 # a step has not been automated, but this ansible role is executed
 # on the server on which apache is installed
@@ -27,7 +16,7 @@
         url: "http://{{inventory_hostname}}"
         follow_redirects: yes
 
-    - name:  check that the server can be reached
+    - name:  check that the server can be reached, copy default page in /tmp
       get_url:
         url:  "http://{{inventory_hostname}}"
         dest: /tmp/index.html

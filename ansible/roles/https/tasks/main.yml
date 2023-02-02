@@ -1,3 +1,8 @@
+    - name: Enable the Apache2 module ssl
+      apache2_module:
+        state: present
+        name: ssl
+
     - name: install certbot using apt
       apt:
         name: python3-certbot-apache
