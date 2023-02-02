@@ -1,4 +1,4 @@
-write an ansible role to enable https support for apache for an ubuntu node
+## write an ansible role to enable https support for apache for an ubuntu node
 
 Here is a sample Ansible role that enables HTTPS support for Apache on an Ubuntu node:
 
@@ -55,7 +55,7 @@ yaml
 
 This role assumes that the Apache web server is already installed and running on the target Ubuntu systems. The role installs the `mod_ssl` module, creates an SSL certificate and key file, and updates the Apache configuration to enable HTTPS support. The SSL certificate and key can be generated using tools like `openssl`. The Apache web server is restarted after making the necessary changes to the configuration file.
 
-write an ansible role to check that a node can be reached and it is possible to become root
+## write an ansible role to check that a node can be reached and it is possible to become root
 
 Here is a sample Ansible role that checks if a node can be reached and it is possible to become root:
 
@@ -80,7 +80,7 @@ yaml
 
 This role uses the `ping` module to check if the node is reachable, and the `become` directive with the `command` module to check if root access is possible. The output of the `command` is stored in the `result` variable, which is then displayed using the `debug` module to indicate whether root access is possible or not.
 
-How to generate a free ssh certificate signed by a recognized authority
+## How to generate a free ssh certificate signed by a recognized authority
 
 To generate a free SSH certificate signed by a recognized authority, you can use the Let's Encrypt CA (Certificate Authority). Let's Encrypt is a free, automated, and open certificate authority that provides free SSL/TLS certificates to enable HTTPS on websites.
 
@@ -112,7 +112,7 @@ sudo certbot certonly --standalone
 
 Note: Let's Encrypt certificates are only valid for 90 days, so you'll need to renew them regularly. You can set up a cron job to automate the renewal process.
 
-How to generate a certbot certificate without be prompted
+## How to generate a certbot certificate without be prompted
 
 To generate a certbot certificate without being prompted, you can use the `certbot certonly` command with the `--standalone` and `--non-interactive` options. Here's an example:
 
