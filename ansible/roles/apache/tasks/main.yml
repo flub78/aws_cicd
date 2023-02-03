@@ -1,3 +1,7 @@
+# Apache role
+#
+# Install and configure the Apache server on an Ubuntu machine
+
     - name: install apache2
       apt: name=apache2 update_cache=yes state=latest
 
@@ -21,3 +25,23 @@
         url:  "http://{{inventory_hostname}}"
         dest: /tmp/index.html
         timeout: 30
+
+#     mode: <file-mode> # file-mode can be numbers like 0644, or symbols like u=rw,g=r,o=r, or symbol changes u+rw,g-wx,o-rwx.
+
+    - name: Create a directory for each hosted domain if it does not exist
+      file:
+        path: "/var/www/{{domain_name}}"
+        state: directory
+        mode: u=rwx,g=rx,o=rx
+
+    - name: Create a default home page
+      copy:
+        src: "/var/www/html/index.html"
+        dest: "/var/www/{{domain_name}}"
+        remote_src: true
+
+    - name: Personalize the default home page
+      replace:
+        path: "/var/www/{{domain_name}}/index.html"
+        regexp: 'It works!'
+        replace: "{{domain_name}}"
