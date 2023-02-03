@@ -11,12 +11,12 @@
 
   roles:
 #    - check_access
-    - apache
+#    - apache
     - python
-    - https
+#    - https
 #    - mysql
 #    - ftp
-#    - php
+    - php
 #    - gvv
 #    - jdk
 #    - jenkins
