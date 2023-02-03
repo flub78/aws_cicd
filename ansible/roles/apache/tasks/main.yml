@@ -10,16 +10,7 @@
       register: a2enmodrewrite
       changed_when: "'already enabled' not in a2enmodrewrite.stdout"
 
-    - name: check that the server can be reached
-      uri:
-        url: "http://{{inventory_hostname}}"
-        follow_redirects: yes
 
-    - name:  check that the server can be reached, copy default page in /tmp
-      get_url:
-        url:  "http://{{inventory_hostname}}"
-        dest: /tmp/index.html
-        timeout: 30
 
 # mode: <file-mode> # file-mode can be numbers like 0644, or symbols like u=rw,g=r,o=r, or symbol changes u+rw,g-wx,o-rwx.
 
@@ -41,23 +32,13 @@
         regexp: 'It works!'
         replace: "{{domain_name}}"
 
-# Change the default SSL 
-    - name: Print apache information
-      debug:
-        msg: 
-        - "Apache configuration file: {{apache_conf_file}}"
-        - "SSL certificate file: {{ssl_cert_file}}"
-        - "SSL key file: {{ssl_key_file}}"
+    - name: check that the server can be reached
+      uri:
+        url: "http://{{inventory_hostname}}"
+        follow_redirects: yes
 
-    - name: Update Apache configuration to enable HTTPS
-      lineinfile:
-        dest: "{{ apache_conf_file }}"
-        regexp: "{{ item.regexp }}"
-        line: "{{ item.line }}"
-      loop:
-        - {regexp: "^SSLCertificateFile.*$", line: "SSLCertificateFile {{ ssl_cert_file }}"}
-        - {regexp: "^SSLCertificateKeyFile.*$", line: "SSLCertificateKeyFile {{ ssl_key_file }}"}          
-      notify:
-        - restart apache2
-
-# Create virtual hosts
+    - name:  check that the server can be reached, copy default page in /tmp
+      get_url:
+        url:  "http://{{inventory_hostname}}"
+        dest: /tmp/index.html
+        timeout: 30

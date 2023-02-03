@@ -1,3 +1,22 @@
+# https role
+#
+# Enable HTTPS in apache
+
+# It is a very bad id to delete the certificate and key files are
+# they are not regenerated as long as the certificate is still valid.
+#
+# I wonder if it is a good idea to invoke certbot on the controlled host,
+# May be that it would be smarter to create the certificate on the control node and
+# push the files on the controlled nodes.
+
+    - name: domain name
+      debug:
+        msg: "domain = {{domain_name}}"
+        
+    - name: generate certificate
+      become: yes
+      command: certbot certonly --standalone --non-interactive --email frederic.peignot@free.fr --agree-tos -d {{domain_name}}
+      
     - name: Enable the Apache2 module ssl
       apache2_module:
         state: present
@@ -8,7 +27,47 @@
         name: python3-certbot-apache
         state: present
 
-    - name: generate certificate
-      become: yes
-      command: certbot certonly --standalone --non-interactive --email frederic.peignot@free.fr --agree-tos -d {{domain_name}}
+# Change the default SSL 
+    - name: Print apache information
+      debug:
+        msg: 
+        - "Apache configuration file: {{apache_conf_file}}"
+        - "SSL certificate file: {{ssl_cert_file}}"
+        - "SSL key file: {{ssl_key_file}}"
 
+#    - name: Update Apache configuration to enable HTTPS
+#      lineinfile:
+#        path: "{{ apache_conf_file }}"
+#        regexp: "{{item.regexp}}"
+#        line: "{{item.line}}"
+#        state: present
+#      loop:
+#        - {regexp: "^SSLCertificateFile.*$", line: "SSLCertificateFile {{ ssl_cert_file }}", state: present}
+#        - {regexp: "^SSLCertificateKeyFile.*$", line: "SSLCertificateKeyFile {{ ssl_key_file }}"}          
+#      notify:
+#        - restart apache2
+
+    - name: Update Apache configuration to enable HTTPS
+      lineinfile:
+        path: "{{ apache_conf_file }}"
+        regexp: "^SSLCertificateFile.*$"
+        line: "SSLCertificateFile {{ ssl_cert_file }}"
+      notify:
+        - restart apache2
+
+    - name: Update Apache configuration to enable HTTPS
+      lineinfile:
+        path: "{{ apache_conf_file }}"
+        regexp: "^SSLCertificateKeyFile.*$"
+        line: "SSLCertificateKeyFile {{ ssl_key_file }}"
+      notify:
+        - restart apache2
+
+    - name : enable default-ssl
+      command: a2ensite default-ssl
+      notify:
+        - restart apache2
+
+# Create virtual hosts
+
+# Test HTTPS access
