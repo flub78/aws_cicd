@@ -4,24 +4,24 @@
           - mysql-server
           - mysql-client
           - libmysqlclient-dev
+          - python3-mysqldb
         state: present
         update_cache: true
 
-#      apt: name=['mysql-server', 'mysql-client', 'python-mysqldb', 'libmysqlclient-dev'] state=present update_cache=yes
+    - name: start mysql
+      service:
+        name: mysql
+        state: started
+        enabled: yes
 
-#    - name: Update MySQL root password for all root accounts
-#      mysql_user: name=root host={{ item }} password={{ mysql_root_pass }} state=present
-#      with_items:
-#        - "{{ ansible_hostname }}"
-#        - 127.0.0.1
-#        - ::1
-#        - localhost
+# Once the root password has been changed this task returns an error
+    - name: Update MySQL root password for all root accounts
+      mysql_user: name=root host={{ item }} password={{ mysql_root_password }} state=present
+      with_items:
+        - "{{ ansible_hostname }}"
+        - 127.0.0.1
+        - ::1
+        - localhost
 
-#    - name: Copy the root credentials as .my.cnf file
-#      template: src=root.cnf.j2 dest=~/.my.cnf mode=0600
-
-#    - name: Ensure Anonymous user(s) are not in the database
-#      mysql_user: name='' host={{ item }} state=absent
-#      with_items:
-#        - localhost
-#        - "{{ ansible_hostname }}"
+    - name: Copy the root credentials as .my.cnf file
+      template: src=root.cnf.j2 dest=~/.my.cnf mode=0600

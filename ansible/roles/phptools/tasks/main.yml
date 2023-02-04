@@ -1,0 +1,54 @@
+---
+- name: phploc
+  get_url:
+    url:  https://phar.phpunit.de/phploc.phar
+    dest: /usr/local/bin/phploc
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: pdepend
+  get_url:
+    url: https://github.com/pdepend/pdepend/releases/download/2.7.0/pdepend.phar
+    dest: /usr/local/bin/pdepend
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: phpmd
+  get_url:
+    url:  https://phpmd.org/static/latest/phpmd.phar
+    dest: /usr/local/bin/phpmd
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: phpcpd
+  get_url:
+    url:  https://phar.phpunit.de/phpcpd.phar 
+    dest: /usr/local/bin/phpcpd
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: phpcs
+  get_url:
+    url: https://squizlabs.github.io/PHP_CodeSniffer/phpcs.phar
+    dest: /usr/local/bin/phpcs
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: phpdox
+  get_url:
+    url: https://github.com/theseer/phpdox/releases/download/0.12.0/phpdox-0.12.0.phar
+    dest: /usr/local/bin/phpdox
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: phpunit
+  get_url:
+    url: https://phar.phpunit.de/phpunit-7.3.phar
+    dest: /usr/local/bin/phpunit
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: phing
+  get_url:
+    url: https://www.phing.info/get/phing-latest.phar
+    dest:  /usr/local/bin/phing
+    mode: 'u=rwx,g=rx,o=rx'
+
+- name: phpdoc
+  get_url:
+    url: https://github.com/phpDocumentor/phpDocumentor/releases/download/v2.9.1/phpDocumentor.phar
+    dest: /usr/local/bin/phpdoc
+    mode: 'u=rwx,g=rx,o=rx'
