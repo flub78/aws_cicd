@@ -1,0 +1,3 @@
+---
+# vars file for jdk
+pl_jdk_version: "{{jdk_version|default('8')}}"

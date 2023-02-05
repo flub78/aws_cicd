@@ -1,0 +1,8 @@
+---
+# tasks file for jdk
+
+- name: Install openksdk
+  apt:
+    name:
+      - openjdk-{{pl_jdk_version}}-jdk
+    state: latest
