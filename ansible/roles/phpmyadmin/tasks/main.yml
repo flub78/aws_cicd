@@ -1,0 +1,42 @@
+# phpmyadmin role
+#
+# Install and configure phpmyadmin
+
+  - name: Install phpmyadmin
+    apt:
+      name:
+        - phpmyadmin
+      state: latest
+
+# From this point there are two ways to configure phpmyadmin
+# Either as a subdomain which implies
+# - to declare the subdomain in the S3 route to be directed to the correct IP
+# - to add the subdomain to the certbot certificate
+# - to create a virtual host conf for apache with correct phpmyadmin directory and certificate
+# - to enable this virtual host
+# - to restart apache.
+#
+# or to create a symbolic link to phpmyadmin
+#
+# Then phpmyadmin can be accessed at https://my_domain/phpmyadmin
+# (use root and the mysql root password to connect)
+
+  - name: Create a symbolic link
+    file:
+      src: /usr/share/phpmyadmin
+      dest: "/var/www/{{domain_name}}/phpmyadmin"
+      state: link
+
+#  - name: Configure Apache for phpMyAdmin
+#    become: yes
+#    template:
+#      src: templates/apache-phpmyadmin.conf.j2
+#      dest: /etc/apache2/sites-available/phpmyadmin.conf
+#    notify:
+#      - restart apache2
+
+#  - name: Enable phpMyAdmin site in Apache
+#    become: yes
+#    command: a2ensite phpmyadmin.conf
+#    notify:
+#      - restart apache2

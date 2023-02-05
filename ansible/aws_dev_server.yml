@@ -12,16 +12,15 @@
   roles:
 #    - check_access
 #    - apache
-    - python
+#    - python
 #    - https
 #    - mysql
-#    - ftp
-    - php
+#    - php
+    - phpmyadmin
 #    - gvv
 #    - jdk
 #    - jenkins
 #    - phptools
-#    - watir
 
   pre_tasks:
 
