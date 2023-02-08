@@ -4,7 +4,7 @@
           - pip
 #          - python3-dnf
       
-#    - name: Install pip modules
-#      pip:
-#        name: dnf
+    - name: Install pip modules
+      pip:
+        name: python-jenkins
 

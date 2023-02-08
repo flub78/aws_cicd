@@ -12,14 +12,15 @@
   roles:
 #    - check_access
 #    - apache
-#    - python
+    - python
 #    - https
 #    - mysql
 #    - php
 #    - phpmyadmin
 #    - phptools
 #    - jdk
-    - jenkins
+#    - jenkins
+    - jenkins_jobs
 #    - gvv
 
   pre_tasks:
