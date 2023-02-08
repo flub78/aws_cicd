@@ -6,18 +6,12 @@
       state: present
       url: https://pkg.jenkins.io/redhat-stable/jenkins.io.key  
 
-  # bad source list format, but the action need to be performed anywy
   # sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' 
   - name: Add the jenkins repository
     apt_repository:
       repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
       state: present
   
-  #- name: Download Long Term Jenkins release
-  #  get_url:
-  #    url: https://pkg.jenkins.io/redhat-stable/jenkins.repo
-  #    dest: /etc/yum.repos.d/jenkins.repo
-
   - name: Update package cache
     apt:
       update_cache: yes

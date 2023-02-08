@@ -4,7 +4,7 @@
 
     sudo apt-get update
     sudo apt install ansible-core
-    sudo apt install ansible
+    sudo apt install ansiblehttps://docs.github.com/en/copilot/getting-started-with-github-copilot/getting-started-with-github-copilot-in-visual-studio-code
 
     ansible --version
     ansible [core 2.12.0]
