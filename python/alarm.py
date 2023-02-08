@@ -11,20 +11,14 @@ import os
 import boto3
 import json
 
+from lib.aws import *
+from lib.aws_alarm import *
 
 description="aws alarms"
 resource='alarm'
 basename = os.environ.get('BASENAME')
 
 ec2 = boto3.resource('ec2')
-ec2_client = boto3.client('ec2')
-cloudwatch = boto3.client('cloudwatch')
-
-filename = 'ec2-keypair.pem'
-keyname = 'ec2-keypair'
-if basename:
-    filename = basename + '_' + filename
-    keyname = basename + '_' + keyname
 
 # Parsing of the CLI arguments
 parser = argparse.ArgumentParser(description=description)
@@ -37,59 +31,42 @@ group.add_argument('-s', '--stop', action='store_true', help='stop an ' + resour
 group.add_argument('-r', '--resume', action='store_true', help='restart an ' + resource)
 
 parser.add_argument('-v', '--verbose', action='store_true', help='verbose mode')
-# parser.add_argument('--int', type=int, help='an integer value')
-# parser.add_argument('--float', type=float, help='a float value')
 parser.add_argument('-i', '--instance', type=str, help='EC2 instance ID')
 parser.add_argument('-n', '--name', type=str, help='name of the ' + resource + ' to create')
 parser.add_argument('-f', '--filter', type=str, help='process only the matching strings')
 parser.add_argument('-k', '--keypair', type=str, help='keypair to use')
-
-# parser.add_argument('--bool', type=bool, help='a boolean value')
-
 args = parser.parse_args()
 
 ###################################################
 def list():
     """ list all the resources """
-    if args.verbose:
-        print ('list the ' + resource)
-    response = cloudwatch.describe_alarms()
-    for alarm in response['MetricAlarms']:
-        json_string = json.dumps(alarm, indent=2, default=str)
-        print(json_string)
-        print()
-
+    list = alarm_list(args.verbose, args.filter)
+    for alarm in list:
+        s = ', '
+        ec2_list = []
+        for dim in  alarm['Dimensions']:
+            ec2_list.append(dim['Value'])
+        print(alarm['AlarmName'], alarm['AlarmDescription'], s.join(alarm['AlarmActions']), s.join(ec2_list) )
 
 def create():
     """ create a resource """
    
     if args.verbose:
-        print ('creating ' + resource + ' ' + keyname)
+        print ('creating ' + resource)
+    if (not args.instance):
+        print("instance arguments is mandatory to create an alarm")
+        exit()
 
-    # create a file to store the key locally
-    outfile = open(filename,'w')
-
-    # call the boto ec2 function to create a key pair
-    key_pair = ec2.create_key_pair(KeyName=keyname)
-
-    # capture the key and store it in a file
-    KeyPairOut = str(key_pair.key_material)
-    if args.verbose:
-        print(KeyPairOut)
-    outfile.write(KeyPairOut)   
+    alarm_create([args.instance])
 
 def delete():
     """ delete a resource """
     if args.verbose:
-        print ('delete ' + resource, keyname)
-    response = ec2_client.delete_key_pair(KeyName=keyname)
-    # print(response)
+        print ('deleting ' + resource)
+    alarm_delete()
 
 ###################################################
 # Main processing
-
-# print('args = ')
-# print (args)
 
 if args.list:
     list()    
@@ -99,6 +76,3 @@ if args.create:
 
 if args.delete:
     delete()
-
-if args.instance:
-    print ('instance = ' + args.instance)

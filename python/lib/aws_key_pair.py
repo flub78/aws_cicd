@@ -4,7 +4,7 @@
 """
     AWS library
 
-    This module is a collection of functions to handle AWS objects to manage a CI/CD pipeline.
+    This module is a collection of functions to handle AWS key pairs to manage a CI/CD pipeline.
 
 """
 
@@ -16,7 +16,7 @@ ec2_client = boto3.client('ec2')
 ec2 = boto3.resource('ec2')
 
 def key_pair_list(verbose = False, filter = ""):
-    """ return a list of key pairs"""
+    """ return a list of key pairs """
     response = ec2_client.describe_key_pairs()
     if (verbose):
         print("Key pair list")
