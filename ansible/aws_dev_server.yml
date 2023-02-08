@@ -19,7 +19,7 @@
 #    - phpmyadmin
 #    - phptools
 #    - jdk
-#    - jenkins
+    - jenkins
     - jenkins_jobs
 #    - gvv
 

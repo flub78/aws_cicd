@@ -21,3 +21,10 @@
       name:
         - jenkins
       state: latest
+
+  - name: Install Jenkins plugin
+    jenkins_plugin:
+      name: "phing"
+      url: "{{ jenkins_server }}"
+      username: "{{ jenkins_user }}"
+      password: "{{ jenkins_password }}"
