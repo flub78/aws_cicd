@@ -1,0 +1,19 @@
+---
+
+- name: Installing a continuous integration server
+
+  gather_facts: true
+  hosts: jenkins
+
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  roles:
+    - jdk
+    - jenkins
+
+  pre_tasks:
+
+    - name: test connection
+      ping:

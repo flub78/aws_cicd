@@ -1,0 +1,23 @@
+---
+
+- name: Installing a LAMP server
+
+  gather_facts: true
+  hosts: jenkins
+
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  roles:
+    - apache
+    - python
+    - https
+    - mysql
+    - php
+    - phpmyadmin
+
+  pre_tasks:
+
+    - name: test connection
+      ping:
