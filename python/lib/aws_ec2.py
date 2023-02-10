@@ -39,7 +39,7 @@ def ec2_select_ids(verbose = False, name="", id="", filter=""):
             str += instance['ImageId'] + ' '
             str += instance['InstanceType'] + ' '
             str += instance['State']['Name'] + ' '
-            str += instance['KeyName'] + ' '
+            # str += instance['KeyName'] + ' '
             str += instance['Placement']['AvailabilityZone'] + ' '
             str += instance['PublicDnsName'] + ' '
 
@@ -120,7 +120,8 @@ def ec2_print_list(list, verbose=False):
                         name = tag['Value']
         
         print(name, instance['InstanceId'], instance['InstanceType'],
-              instance['KeyName'], instance['State']['Name'],
+              # instance['KeyName'], 
+              instance['State']['Name'],
               instance['Placement']['AvailabilityZone'],
               instance['PublicDnsName']
         )
