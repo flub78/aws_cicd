@@ -15,7 +15,7 @@ provider "aws" {
 
 resource "aws_key_pair" "my_ec2" {
     key_name   = "terraform-key"
-    public_key = file(".ssh/terraform.pub")
+    public_key = file(var.PUBLIC_KEY)
 }
 
 resource "aws_security_group" "tf_sg" {
@@ -52,19 +52,9 @@ resource "aws_instance" "app_server" {
   connection {
     type        = "ssh"
     user        = "ubuntu"
-    private_key = file(".ssh/terraform")
+    private_key = file(var.PRIVATE_KEY)
         host        = self.public_ip
   }
-
-  provisioner "remote-exec" {
-    inline = [
-          "sudo apt-get -f -y update",
-          "sudo apt-get install -f -y apache2",
-          "sudo systemctl start apache2",
-          "sudo systemctl enable apache2",
-          "sudo sh -c 'echo \"<h1>Hello devopssec</h1>\" > /var/www/html/index.html'",
-    ]
-  } 
 
   tags = {
     Name = var.instance_name

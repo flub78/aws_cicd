@@ -11,3 +11,7 @@ export ANSIBLE_VAULT_PASSWORD_FILE=~/.ssh/ansible_vault_key
 
 # Path: setenv.sh
 export PATH=~/aws_cicd/python:$PATH
+
+# Terrafom variables
+export TF_VAR_PUBLIC_KEY="$HOME/.ssh/terraform.pub"
+export TF_VAR_PRIVATE_KEY="$HOME/.ssh/terraform"

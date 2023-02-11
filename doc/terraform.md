@@ -43,7 +43,7 @@ chmod 700 .ssh
 # add it to .gitignore
 
 # Generate the key with no passphrase
-ssh-keygen -t rsa -f .ssh/terraform
+ssh-keygen -t rsa -f $TF_VAR_PRIVATE_KEY
 
 chmod 400 .ssh/*
 ```
@@ -51,5 +51,5 @@ chmod 400 .ssh/*
 ### Login to the EC2 instance
 
 ```
-ssh -i .ssh/terraform ubuntu@ec2-35-181-154-234.eu-west-3.compute.amazonaws.com
+ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ec2-35-181-154-234.eu-west-3.compute.amazonaws.com
 ```
