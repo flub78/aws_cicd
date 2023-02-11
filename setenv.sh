@@ -8,3 +8,6 @@ export BASENAME=ratus
 # export AWS_DEFAULT_OUTPUT=text
 
 export ANSIBLE_VAULT_PASSWORD_FILE=~/.ssh/ansible_vault_key
+
+# Path: setenv.sh
+export PATH=~/aws_cicd/python:$PATH

@@ -10,8 +10,6 @@
       register: a2enmodrewrite
       changed_when: "'already enabled' not in a2enmodrewrite.stdout"
 
-
-
 # mode: <file-mode> # file-mode can be numbers like 0644, or symbols like u=rw,g=r,o=r, or symbol changes u+rw,g-wx,o-rwx.
 
     - name: Create a directory for each hosted domain if it does not exist
