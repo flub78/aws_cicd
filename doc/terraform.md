@@ -30,3 +30,26 @@ $ terraform destroy
 $ terraform state list
 aws_instance.app_server
 ```
+
+## Creation of an EC2 instance with ssh access
+
+### RSA key creation
+
+```
+# create a directory to store the keys
+mkdir .ssh
+chmod 700 .ssh
+
+# add it to .gitignore
+
+# Generate the key with no passphrase
+ssh-keygen -t rsa -f .ssh/terraform
+
+chmod 400 .ssh/*
+```
+
+### Login to the EC2 instance
+
+```
+ssh -i .ssh/terraform ubuntu@ec2-35-181-154-234.eu-west-3.compute.amazonaws.com
+```
