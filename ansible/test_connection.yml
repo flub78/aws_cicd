@@ -2,7 +2,7 @@
 
 - name: Network Getting Started First Playbook
   gather_facts: true
-  hosts: mina
+  hosts: jenkins
   become: yes
   become_method: sudo
   become_user: root

@@ -57,3 +57,9 @@ ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server
 - php install the php environment
 - php_tools install the static analyzer
 - jenkins install jenkins and its modules
+
+## Ansible playbooks
+
+```
+ansible-playbook test_connection.yml  --key-file $TF_VAR_PRIVATE_KEY
+```
