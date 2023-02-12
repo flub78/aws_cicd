@@ -46,12 +46,12 @@ def delete():
 
 ###################################################
 # Main processing
-
-if args.list:
-    list()    
+###################################################
 
 if args.create:
     create()
 
 if args.delete:
     delete()
+
+list()    

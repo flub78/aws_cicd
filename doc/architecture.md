@@ -1,4 +1,4 @@
-# CI/CD architecture
+# Typical infrastructure
 
 The minimal set of servers that I want to deploy is:
 

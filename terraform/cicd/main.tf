@@ -14,7 +14,7 @@ provider "aws" {
 }
 
 resource "aws_key_pair" "my_ec2" {
-    key_name   = "terraform-key"
+    key_name   = "tf-key"
     public_key = file(var.PUBLIC_KEY)
 }
 
@@ -45,7 +45,7 @@ resource "aws_security_group" "tf_sg" {
 
 resource "aws_instance" "app_server" {
   ami           = "ami-0afd55c0c8a52973a"
-  instance_type = "t2.nano"
+  instance_type = "t2.medium"
   vpc_security_group_ids = [aws_security_group.tf_sg.id]
   key_name      = aws_key_pair.my_ec2.key_name
 

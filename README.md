@@ -27,13 +27,13 @@ A control node to create an populate the infrastructure. It is typically a Linux
 ## Table of content
 
 - [Introduction](doc/introduction.md) 
-- [CI/CD Architecture](architecture.md)
+- [CI/CD Architecture](doc/architecture.md)
   
-- [Step by step creation and population of an EC2 instance](step_by_step.md)
+- [Step by step creation and population of an EC2 instance](doc/step_by_step.md)
 
-- [Jenkins](jenkins.md)
-  - [https role](https_role.md)
-  - [mysql role](mysql_role.md)
+- [Jenkins](doc/jenkins.md)
+  - [https role](doc/https_role.md)
+  - [mysql role](doc/mysql_role.md)
 
 
 

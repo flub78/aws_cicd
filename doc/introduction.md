@@ -4,15 +4,6 @@
 
 The first project to be integrated is a continuous test and integration environment for a PHP Laravel project. This setup should be usable on others type of project just by modifying the infrastructure provisioning and the list of roles to apply.
 
-## The control machine
-
-It is the machine on which this git project is checked out and the scripts to create the CI/CD pipeline are executed.
-
-It is important to have the minimal set of requirements on this machine. Typically I want a Linux shell with terraform, ansible and aws CLI environment but nothing more. 
-
-Most of the devolpment has been done on Windows WSL.
-
-
 # Architecture
 
 ## Pipeline creation steps

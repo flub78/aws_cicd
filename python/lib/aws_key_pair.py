@@ -11,6 +11,7 @@
 import boto3
 import json
 import os
+from os.path import exists
 
 ec2_client = boto3.client('ec2')
 ec2 = boto3.resource('ec2')
@@ -90,4 +91,4 @@ def key_pair_delete(ids = [], verbose=False):
             print ('deleting key pair id=' + id['KeyPairId'])
         response = ec2_client.delete_key_pair(KeyPairId=id['KeyPairId'])
         filename = id['KeyName'] + '.pem'
-        os.remove(filename) 
+        if os.path.exists(filename): os.remove(filename) 
