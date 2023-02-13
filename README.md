@@ -28,6 +28,7 @@ A control node to create an populate the infrastructure. It is typically a Linux
 
 - [Introduction](doc/introduction.md) 
 - [CI/CD Architecture](doc/architecture.md)
+- [AWS](doc/aws.md)
   
 - [Step by step creation and population of an EC2 instance](doc/step_by_step.md)
 
