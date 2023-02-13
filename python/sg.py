@@ -32,9 +32,9 @@ args = parser.parse_args()
 def list():
     """ list all the resources """    
     list = security_group_list(args.verbose, args.filter)
-    return
+    
     for security_group in list:
-        print(security_group['KeyName'], security_group['KeyPairId'], security_group['KeyType'])
+        print(security_group['GroupName'], security_group['GroupId'], security_group['Description'])
 
 def create():
     """ create a resource """
@@ -46,12 +46,12 @@ def delete():
 
 ###################################################
 # Main processing
-
-if args.list:
-    list()    
+###################################################
 
 if args.create:
     create()
 
 if args.delete:
     delete()
+
+list()    

@@ -24,8 +24,8 @@ def security_group_list(verbose = False, filter = ""):
 
     if (filter):
         list = []
-        for key in response['KeyPairs']:
-            str = key['KeyName'] + key['KeyPairId'] +  key['KeyType']
+        for key in response['SecurityGroups']:
+            str = key['GroupName'] + key['GroupId'] +  key['Description']
             if filter in str:
                 list.append(key)
         return list
@@ -74,7 +74,7 @@ def security_group_create(name="", verbose=False):
     outfile = open(filename,'w')
 
     # call the boto ec2 function to create a security groups
-    security_group = ec2.create_security_group(KeyName=name)
+    security_group = ec2.create_security_group(GroupName=name)
 
     # capture the key and store it in a file
     KeyPairOut = str(security_group.key_material)
@@ -87,7 +87,5 @@ def security_group_delete(ids = [], verbose=False):
     """ Delete a list of security groupss from ids """
     for id in ids:
         if (verbose):
-            print ('deleting security groups id=' + id['KeyPairId'])
-        response = ec2_client.delete_security_group(KeyPairId=id['KeyPairId'])
-        filename = id['KeyName'] + '.pem'
-        os.remove(filename) 
+            print ('deleting security groups id=' + id['GroupId'])
+        response = ec2_client.delete_security_group(GroupId=id['GroupId'])
