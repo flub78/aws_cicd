@@ -10,16 +10,16 @@ terraform {
 }
 
 provider "aws" {
-  region = "eu-west-3"
+  region = var.region
 }
 
-resource "aws_key_pair" "tf_mina_kp" {
-  key_name   = "tf-mina_key"
+resource "aws_key_pair" "ssh_kp" {
+  key_name   = "${var.basename}_key"
   public_key = file(var.PUBLIC_KEY)
 }
 
-resource "aws_security_group" "tf_mina_sg" {
-  name = "tf-mina-sg"
+resource "aws_security_group" "webapp_sg" {
+  name = "${var.basename}_sg"
 
   egress {
     from_port   = 0
@@ -42,7 +42,6 @@ resource "aws_security_group" "tf_mina_sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-
   ingress {
     from_port   = 22
     to_port     = 22
@@ -52,20 +51,20 @@ resource "aws_security_group" "tf_mina_sg" {
 }
 
 resource "aws_instance" "app_server" {
-  ami                    = "ami-0afd55c0c8a52973a"
-  instance_type          = "t2.medium"
-  vpc_security_group_ids = [aws_security_group.tf_mina_sg.id]
-  key_name               = aws_key_pair.tf_mina_kp.key_name
+  ami                    = var.ami
+  instance_type          = var.instance_type
+  vpc_security_group_ids = [aws_security_group.webapp_sg.id]
+  key_name               = aws_key_pair.ssh_kp.key_name
 
   connection {
     type        = "ssh"
-    user        = "ubuntu"
+    user        = var.user
     private_key = file(var.PRIVATE_KEY)
     host        = self.public_ip
   }
 
   tags = {
-    Name = var.instance_name
+    Name = "${var.basename}_app_server"
   }
 
   user_data = <<-EOF
@@ -73,4 +72,13 @@ resource "aws_instance" "app_server" {
     echo "Hello, Flub78" > index.html
     python3 -m http.server 8080 &
   EOF
+}
+
+# resource block for elastic ip #
+resource "aws_eip" "web_server_eip" {
+  instance = aws_instance.app_server.id
+  vpc      = true
+    tags = {
+    Name = "${var.basename}_eip"
+  }
 }

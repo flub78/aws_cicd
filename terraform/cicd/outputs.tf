@@ -17,3 +17,8 @@ output "instance_ssh_cmd" {
   description = "ssh command to login to the EC2 instance"
   value       = "ssh -i $TF_VAR_PRIVATE_KEY ubuntu@${aws_instance.app_server.public_dns}"
 }
+
+output "http" {
+  description = "url to access the app"
+  value       = "http://${aws_instance.app_server.public_dns}:8080"
+}
