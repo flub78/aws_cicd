@@ -8,7 +8,6 @@ variable "basename" {
   default     = "tf-mina"
 }
 
-
 /*
  * Infrastructure configuration
  */ 
@@ -47,4 +46,10 @@ variable "user" {
   type        = string
   default     = "ubuntu"
   sensitive   = true
+}
+
+variable "domain" {
+  description = "Domain name to use for the EC2 instance"
+  type        = string
+  default     = "web.flub78.net"
 }

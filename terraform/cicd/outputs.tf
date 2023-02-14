@@ -3,22 +3,27 @@ output "instance_id" {
   value       = aws_instance.app_server.id
 }
 
-output "instance_public_ip" {
-  description = "Public IP address of the EC2 instance"
-  value       = aws_instance.app_server.public_ip
+output "elastic_ip" {
+  description = "Elastic IP"
+  value       = aws_eip.web_server_eip.public_ip
 }
 
-output "instance_public_dns" {
+output "domain" {
+  description = "Domain name"
+  value       = var.domain
+}
+
+output "eip_public_dns" {
   description = "Public DNS of the EC2 instance"
-  value       = aws_instance.app_server.public_dns
+  value       = aws_eip.web_server_eip.public_dns
 }
 
 output "instance_ssh_cmd" {
   description = "ssh command to login to the EC2 instance"
-  value       = "ssh -i $TF_VAR_PRIVATE_KEY ubuntu@${aws_instance.app_server.public_dns}"
+  value       = "ssh -i $TF_VAR_PRIVATE_KEY ubuntu@${aws_eip.web_server_eip.public_dns}"
 }
 
 output "http" {
   description = "url to access the app"
-  value       = "http://${aws_instance.app_server.public_dns}:8080"
+  value       = "http://${aws_eip.web_server_eip.public_dns}:8080"
 }

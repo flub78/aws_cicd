@@ -69,7 +69,7 @@ resource "aws_instance" "app_server" {
 
   user_data = <<-EOF
     #!/bin/bash
-    echo "Hello, Flub78" > index.html
+    echo "Hello, ${var.basename} Flub78" > index.html
     python3 -m http.server 8080 &
   EOF
 }
@@ -81,4 +81,17 @@ resource "aws_eip" "web_server_eip" {
     tags = {
     Name = "${var.basename}_eip"
   }
+}
+
+resource "aws_route53_zone" "primary" {
+  name = var.domain
+}
+
+resource "aws_route53_record" "root" {
+  zone_id = aws_route53_zone.primary.zone_id
+  name    = var.domain
+  type    = "A"
+
+  ttl    = "300"
+  records = [aws_eip.web_server_eip.public_ip]
 }
