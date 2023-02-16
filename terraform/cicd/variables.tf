@@ -51,5 +51,5 @@ variable "user" {
 variable "domain" {
   description = "Domain name to use for the EC2 instance"
   type        = string
-  default     = "web.flub78.net"
+  default     = "flub78.net"
 }

@@ -4,13 +4,6 @@ output "instance_id" {
   value       = module.webserver.ec2.id
 }
 
-/*
-output "elastic_ip" {
-  description = "Elastic IP"
-  value       = aws_eip.web_server_eip.public_ip
-}
-*/
-
 output "domain" {
   description = "Domain name"
   value       = var.domain
@@ -18,10 +11,10 @@ output "domain" {
 
 output "instance_ssh_cmd" {
   description = "ssh command to login to the EC2 instance"
-  value       = "ssh -i $TF_VAR_PRIVATE_KEY ubuntu@${aws_eip.web_server_eip.public_dns}"
+  value       = "ssh -i $TF_VAR_PRIVATE_KEY ubuntu@${module.routes.elastic_ip.public_dns}"
 }
 
 output "http" {
   description = "url to access the app"
-  value       = "http://${aws_eip.web_server_eip.public_dns}:8080"
+  value       = "http://${module.routes.elastic_ip.public_dns}:8080"
 }
