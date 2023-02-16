@@ -3,19 +3,16 @@ output "instance_id" {
   value       = aws_instance.app_server.id
 }
 
+/*
 output "elastic_ip" {
   description = "Elastic IP"
   value       = aws_eip.web_server_eip.public_ip
 }
+*/
 
 output "domain" {
   description = "Domain name"
   value       = var.domain
-}
-
-output "eip_public_dns" {
-  description = "Public DNS of the EC2 instance"
-  value       = aws_eip.web_server_eip.public_dns
 }
 
 output "instance_ssh_cmd" {

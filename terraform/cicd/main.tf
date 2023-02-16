@@ -13,9 +13,17 @@ provider "aws" {
   region = var.region
 }
 
+/*
 resource "aws_key_pair" "ssh_kp" {
   key_name   = "${var.basename}_key"
   public_key = file(var.PUBLIC_KEY)
+}
+*/
+
+module "ssh_key" {
+  source = "../modules/ssh_key"
+  basename = var.basename
+  public_key = var.PUBLIC_KEY
 }
 
 resource "aws_security_group" "webapp_sg" {
@@ -54,7 +62,7 @@ resource "aws_instance" "app_server" {
   ami                    = var.ami
   instance_type          = var.instance_type
   vpc_security_group_ids = [aws_security_group.webapp_sg.id]
-  key_name               = aws_key_pair.ssh_kp.key_name
+  key_name               = module.ssh_key.key_pair.key_name
 
   connection {
     type        = "ssh"
@@ -83,12 +91,16 @@ resource "aws_eip" "web_server_eip" {
   }
 }
 
-resource "aws_route53_zone" "primary" {
-  name = var.domain
+/*
+ * 
+ */
+data "aws_route53_zone" "primary" {
+  name = "flub78.net"
+  # name = var.domain
 }
 
 resource "aws_route53_record" "root" {
-  zone_id = aws_route53_zone.primary.zone_id
+  zone_id = data.aws_route53_zone.primary.zone_id
   name    = var.domain
   type    = "A"
 
