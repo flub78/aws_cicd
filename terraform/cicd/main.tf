@@ -5,7 +5,6 @@ terraform {
       version = "~> 4.16"
     }
   }
-
   required_version = ">= 1.2.0"
 }
 
@@ -13,55 +12,22 @@ provider "aws" {
   region = var.region
 }
 
-/*
-resource "aws_key_pair" "ssh_kp" {
-  key_name   = "${var.basename}_key"
-  public_key = file(var.PUBLIC_KEY)
-}
-*/
-
 module "ssh_key" {
   source = "../modules/ssh_key"
   basename = var.basename
   public_key = var.PUBLIC_KEY
 }
 
-resource "aws_security_group" "webapp_sg" {
-  name = "${var.basename}_sg"
-
-  egress {
-    from_port   = 0
-    to_port     = 0
-    protocol    = "-1"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 80
-    to_port     = 80
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 8080
-    to_port     = 8080
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
-
-  ingress {
-    from_port   = 22
-    to_port     = 22
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]
-  }
+module "sg" {
+  source = "../modules/security_group"
+  basename = var.basename
+  # ingress_ports = var.ingress_ports
 }
 
 resource "aws_instance" "app_server" {
   ami                    = var.ami
   instance_type          = var.instance_type
-  vpc_security_group_ids = [aws_security_group.webapp_sg.id]
+  vpc_security_group_ids = [module.sg.security_group.id]
   key_name               = module.ssh_key.key_pair.key_name
 
   connection {
@@ -91,9 +57,7 @@ resource "aws_eip" "web_server_eip" {
   }
 }
 
-/*
- * 
- */
+# resource block for route53 record #
 data "aws_route53_zone" "primary" {
   name = "flub78.net"
   # name = var.domain
