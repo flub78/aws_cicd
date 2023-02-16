@@ -24,33 +24,21 @@ module "sg" {
   # ingress_ports = var.ingress_ports
 }
 
-resource "aws_instance" "app_server" {
-  ami                    = var.ami
-  instance_type          = var.instance_type
-  vpc_security_group_ids = [module.sg.security_group.id]
-  key_name               = module.ssh_key.key_pair.key_name
-
-  connection {
-    type        = "ssh"
-    user        = var.user
-    private_key = file(var.PRIVATE_KEY)
-    host        = self.public_ip
-  }
-
-  tags = {
-    Name = "${var.basename}_app_server"
-  }
-
-  user_data = <<-EOF
-    #!/bin/bash
-    echo "Hello, ${var.basename} Flub78" > index.html
-    python3 -m http.server 8080 &
-  EOF
+module "webserver" {
+  source = "../modules/web_server" 
+  name = "${var.basename}_webserver"
+  ami = var.ami
+  instance_type = var.instance_type
+  vpc_sg_id = module.sg.security_group.id
+  key_name = module.ssh_key.key_pair.key_name
+  user = var.user
+  private_key = file(var.PRIVATE_KEY)
 }
+
 
 # resource block for elastic ip #
 resource "aws_eip" "web_server_eip" {
-  instance = aws_instance.app_server.id
+  instance = module.webserver.ec2.id
   vpc      = true
     tags = {
     Name = "${var.basename}_eip"

@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"sg","Source":"../modules/security_group","Dir":"../modules/security_group"},{"Key":"","Source":"","Dir":"."},{"Key":"ssh_key","Source":"../modules/ssh_key","Dir":"../modules/ssh_key"}]}
+{"Modules":[{"Key":"sg","Source":"../modules/security_group","Dir":"../modules/security_group"},{"Key":"","Source":"","Dir":"."},{"Key":"ssh_key","Source":"../modules/ssh_key","Dir":"../modules/ssh_key"},{"Key":"webserver","Source":"../modules/web_server","Dir":"../modules/web_server"}]}
