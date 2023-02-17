@@ -15,3 +15,5 @@ export PATH=~/aws_cicd/python:$PATH
 # Terrafom variables
 export TF_VAR_PUBLIC_KEY="$HOME/.ssh/terraform.pub"
 export TF_VAR_PRIVATE_KEY="$HOME/.ssh/terraform"
+
+export PLAYBOOK=~/aws_cicd/ansible
