@@ -1,7 +1,7 @@
 python/__pycache__/
-terraform/.terraform/
-terraform/cicd/.terraform/providers/registry.terraform.io/hashicorp/aws/4.54.0/linux_amd64/terraform-provider-aws_v4.54.0_x5
-terraform/cicd/.ssh/terraform
-terraform/cicd/.ssh/terraform.pub
-terraform/cicd/terraform.tfstate
-terraform/cicd/terraform.tfstate.backup
+infras/.infras/
+infras/jenkins/.infras/
+infras/jenkins/.ssh/terraform
+infras/jenkins/.ssh/terraform.pub
+infras/jenkins/terraform.tfstate
+infras/jenkins/terraform.tfstate.backup

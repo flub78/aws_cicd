@@ -36,12 +36,18 @@ Terraform configuration are specific to one deployement. Each terraform configur
 
 To manage an infrastructure:
 
-1. cd to the terraform related configuration directory
+1. cd to the terraform configuration directory
 1. setup the environment variables
 1. terraform apply
 1. cd to the ansible playbook directory
 1. apply the playbooks required to the infrastructure.
 1. use the python scripts to monitor, enable and disable part of the infrastucture.
+
+## Terraform Ansible communication
+
+With terraform it is possible to manage similar but different infrastucture with directory structure, workspaces and tfvars files.
+
+To keep things simple, I'd really would like to fully manage an infrastucture from a single directory. This directory would contain eveything specific to one deployment and every terraform command or ansible playbook should apply to it.
 
 ## Cost considerations
 
@@ -49,26 +55,10 @@ AWS bills you on the number of resources that you use and create. To optimize th
 
 ## Python scripts
 
-The scripts are able to restart, suspend or delete a deployment, a sub-system or a component.
+My initial intend was to manage all the infrastucture with python scripts but I decided to use terraform instead.
 
-* Create should create the create the required components
-* Run should pass all component in active state
-* Suspend or pause, should put them in a state that minimize billing
-* Delete should erase the components for good. Note that pre-existing components should not be deleted. A full set of scripts should contains scripts to manage components and sub-systems. Every script should be in charge of a sub-system or component and should be the only way to create or delete the resources (just to avoid side effect of components deleted by a script which has not created them).
+There still some python scripts in this project, they are able
+to monitor or manage the AWS resources from the linux command line. So far I have a script to manage the EC2 instances, key pairs, alarms, etc.
 
-So the scripts should all have the same structrure:
-
-    script_level type action id options
-    script_level = dep, sub or comp for deployment, sub-system or component
-
-    type:
-        * for deployment describe the type of deployments that the scripts can handle example, the name of a laravel project, or an android project, etc.
-        * for the subsystem, it identifies the type of subsystem, for example test_server, jenkins server, production env, etc.
-        * for components, it identifies the type of component, vpc, ec2, key_pair, etc.
-
-    actions: create, run, suspend, delete, list, ect.
-
-    ID : ID of the entity to create or handle, optional for some commands like list.
-
-    Options may describe some share resources or others options.
+Each script is able to list, create and delete resources. The ec2.py can also stop or restart an instance.
 
