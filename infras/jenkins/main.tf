@@ -26,7 +26,7 @@ module "sg" {
 
 module "webserver" {
   source = "../modules/web_server" 
-  name = "${var.basename}_webserver"
+  name = var.basename
   ami = var.ami
   instance_type = var.instance_type
   vpc_sg_id = module.sg.security_group.id
@@ -39,6 +39,17 @@ module "routes" {
   source = "../modules/routes"
   basename = var.basename
   domain = var.domain
-  subdomain = "web"
+  subdomain = var.subdomain
   server_id = module.webserver.ec2.id
+}
+
+resource "local_file" "hosts"{
+  filename = "hosts"
+  #content = module.routes.url
+  content = <<-EOF
+  [${var.subdomain}]
+      ${var.user}@${var.subdomain}.${var.domain}
+  # [${var.subdomain}_ip]
+  #     ${var.user}@${module.routes.elastic_ip.public_ip}
+  EOF
 }

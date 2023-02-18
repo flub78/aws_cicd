@@ -5,7 +5,6 @@
 variable "basename" {
   description = "Basename for AWS resources"
   type        = string
-  default     = "tf-mina"
 }
 
 /*
@@ -26,13 +25,11 @@ variable "PRIVATE_KEY" {
 variable "region" {
   description = "AWS region to use"
   type        = string
-  default     = "eu-west-3"
 }
 
 variable "ami" {
   description = "AWS ami for EC2 instance"
   type        = string
-  default     = "ami-0afd55c0c8a52973a" # Ubuntu 22.04 LTS
 }
 
 variable "instance_type" {
@@ -44,12 +41,14 @@ variable "instance_type" {
 variable "user" {
   description = "User to use for the EC2 instance"
   type        = string
-  default     = "ubuntu"
-  sensitive   = true
 }
 
 variable "domain" {
   description = "Domain name to use for the EC2 instance"
   type        = string
-  default     = "flub78.net"
+}
+
+variable "subdomain" {
+  description = "Subdomain prefix"
+  type        = string
 }

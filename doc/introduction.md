@@ -32,7 +32,10 @@ or
 
 Except for the inventory, ansible scripts are generic and can be applied to a lot of deployment.
 
-Terraform configuration are specific to one deployement. Each terraform configuration directory should contain a setenv.sh script to setup the environment variables common to terraform and ansible.
+Terraform configurations are specific to one deployement. Each terraform configuration directory contains the state of a deployment. If several infrastucture are used simultaneously they have to be managed in separate directories.
+
+It is better to avoid hardcoded values or variable defaults in the terraform scripts. Variables are explicitely set in the terraform.tfvars file.
+
 
 To manage an infrastructure:
 
