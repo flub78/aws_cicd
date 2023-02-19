@@ -43,6 +43,11 @@ module "routes" {
   server_id = module.webserver.ec2.id
 }
 
+module "alarms" {
+  source = "../modules/alarms"
+  instance_id = module.webserver.ec2.id
+}
+
 resource "local_file" "hosts"{
   filename = "hosts"
   #content = module.routes.url
