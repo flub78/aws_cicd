@@ -26,7 +26,6 @@ A control node to create an populate the infrastructure. It is typically a Linux
 
 ## Table of content
 
-- [Introduction](doc/introduction.md) 
 - [CI/CD Architecture](doc/architecture.md)
 - [AWS](doc/aws.md)
   

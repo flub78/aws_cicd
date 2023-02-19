@@ -50,11 +50,18 @@ module "alarms" {
 
 resource "local_file" "hosts"{
   filename = "hosts"
-  #content = module.routes.url
   content = <<-EOF
   [${var.subdomain}]
       ${var.user}@${var.subdomain}.${var.domain}
   # [${var.subdomain}_ip]
   #     ${var.user}@${module.routes.elastic_ip.public_ip}
+  EOF
+}
+
+resource "local_file" "ansible_setenv"{
+  filename = "ansible.setenv"
+  content = <<-EOF
+  export INFRA_HOST=${var.subdomain}
+  export INFRA_DOMAIN="${var.subdomain}.${var.domain}"
   EOF
 }

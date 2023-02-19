@@ -7,3 +7,4 @@ infras/jenkins/terraform.tfstate
 infras/jenkins/terraform.tfstate.backup
 infras/jenkins/.terraform/
 infras/jenkins/hosts
+infras/jenkins/ansible.setenv

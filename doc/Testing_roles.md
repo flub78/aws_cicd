@@ -5,6 +5,7 @@
 To test that an instance has been created use the command from the output.
 
     ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ec2-35-180-72-146.eu-west-3.compute.amazonaws.com
+    
 
 ## Test the basic web server
 
@@ -18,7 +19,7 @@ Once that the DNS table have been updated it is possible to use the full domain 
 
     ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ratus.flub78.net
 
-    http://atus.flub78.net:8080
+    http://ratus.flub78.net:8080
 
 
 ## Testing basic ansible access
@@ -26,6 +27,12 @@ Once that the DNS table have been updated it is possible to use the full domain 
     ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/test_connection.yml
 
 ## Test Apache
+
+    http://ratus.flub78.net
+    ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ratus.flub78.net
+        sudo service apache2 status
+        grep ratus /var/www/ratus.flub78.net/index.html
+        ls /etc/apache2/sites-enabled/
 
 ## Test https
 

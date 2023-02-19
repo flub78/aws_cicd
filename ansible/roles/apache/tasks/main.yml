@@ -14,29 +14,29 @@
 
     - name: Create a directory for each hosted domain if it does not exist
       file:
-        path: "/var/www/{{domain_name}}"
+        path: "/var/www/{{lookup('env','INFRA_DOMAIN')}}"
         state: directory
         mode: u=rwx,g=rx,o=rx
 
     - name: Create a default home page
       copy:
         src: "/var/www/html/index.html"
-        dest: "/var/www/{{domain_name}}"
+        dest: "/var/www/{{lookup('env','INFRA_DOMAIN')}}"
         remote_src: true
 
     - name: Personalize the default home page
       replace:
-        path: "/var/www/{{domain_name}}/index.html"
+        path: "/var/www/{{lookup('env','INFRA_DOMAIN')}}/index.html"
         regexp: 'It works!'
-        replace: "{{domain_name}}"
+        replace: "{{lookup('env','INFRA_DOMAIN')}}"
 
     - name: check that the server can be reached
       uri:
-        url: "http://{{inventory_hostname}}"
+        url: "http://{{lookup('env','INFRA_DOMAIN')}}"
         follow_redirects: yes
 
     - name:  check that the server can be reached, copy default page in /tmp
       get_url:
-        url:  "http://{{inventory_hostname}}"
+        url:  "http://{{lookup('env','INFRA_DOMAIN')}}"
         dest: /tmp/index.html
         timeout: 30
