@@ -11,11 +11,11 @@
 
   roles:
   #  - apache
-    - python
+  #  - python
   #  - https
   #  - mysql
   #  - php
-  #  - phpmyadmin
+    - phpmyadmin
 
   pre_tasks:
 

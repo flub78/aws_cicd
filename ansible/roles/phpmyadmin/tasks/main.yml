@@ -24,7 +24,7 @@
   - name: Create a symbolic link
     file:
       src: /usr/share/phpmyadmin
-      dest: "/var/www/{{domain_name}}/phpmyadmin"
+      dest: "/var/www/{{lookup('env','INFRA_DOMAIN')}}/phpmyadmin"
       state: link
 
 #  - name: Configure Apache for phpMyAdmin

@@ -36,6 +36,35 @@ Once that the DNS table have been updated it is possible to use the full domain 
 
 ## Test https
 
-## Test PHP
+
 
 ## Test MySql
+
+```
+sudo service mysql status
+
+mysql -u root -p
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| sys                |
++--------------------+
+4 rows in set (0.01 sec)
+``` 
+
+## Test PHP
+```
+php --version
+PHP 8.1.16 (cli) (built: Feb 14 2023 18:35:37) (NTS)
+Copyright (c) The PHP Group
+Zend Engine v4.1.16, Copyright (c) Zend Technologies
+    with Zend OPcache v8.1.16, Copyright (c), by Zend Technologies
+```
+
+    http://ratus.flub78.net/index.php
+
+## Test phpmyadmin

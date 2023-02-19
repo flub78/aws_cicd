@@ -11,21 +11,24 @@
 
     - name: domain name
       debug:
-        msg: "domain = {{domain_name}}"
+        msg: "domain = {{lookup('env','INFRA_DOMAIN')}}"
         
-    - name: generate certificate
-      become: yes
-      command: certbot certonly --standalone --non-interactive --email frederic.peignot@free.fr --agree-tos -d {{domain_name}}
+    - name: install certbot using apt
+      apt:
+        name: python3-certbot-apache
+        state: present
+
+    - name: stop apache2
+      service: name=apache2 state=stopped  
+
+#    - name: generate certificate
+#      become: yes
+#      command: certbot certonly --standalone --non-interactive --email frederic.peignot@free.fr --agree-tos -d {{lookup('env','INFRA_DOMAIN')}}
       
     - name: Enable the Apache2 module ssl
       apache2_module:
         state: present
         name: ssl
-
-    - name: install certbot using apt
-      apt:
-        name: python3-certbot-apache
-        state: present
 
 # Change the default SSL 
     - name: Print apache information
