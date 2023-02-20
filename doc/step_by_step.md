@@ -4,17 +4,15 @@ This is an example of creation and population of an EC2 instance.
 
 ## Pre-conditions and pre-requisites
 
-Even if the goal is to become 100 % automated and scripted, the first version of this script will is based on the following assumption.
-
 ### Environment variables
 
 The environment variables to control the CI/CD creation are defined in the setenv.sh file.
 
-Secrets and credential must be stored outside of the github project or kept encrypted in the Ansible vault.
+Secrets and credential are stored outside of the github project or kept encrypted in the Ansible vault.
 
 ## Key generation
 
-First a RSA key needs to be generated, this key will be used to create an AWS key pair and for ssh and ansible connection
+Generate a RSA key that will be imported in a AWS key pair and for ssh and ansible connection.
 
 ```
 ssh-keygen -t rsa -f $TF_VAR_PRIVATE_KEY
@@ -24,6 +22,8 @@ ssh-keygen -t rsa -f $TF_VAR_PRIVATE_KEY
 
 ```
 cd infras/jenkins
+terraform init
+terraform plan
 terraform apply
 ```
 
@@ -31,7 +31,7 @@ By default this terraform configuration creates an EC2 instance that can be acce
 
 ## SSH connection
 
-Once the instance is up and running it is possible to login using the default user and DNS address. The domain name can be used if you wait long enough for the DNS tables to be propagated.
+Once the instance is up and running it is possible to login using the default user and DNS address. To use the domain name wait for the DNS tables to be propagated.
 
 ```
 ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ec2-52-47-144-86.eu-west-3.compute.amazonaws.com
@@ -41,7 +41,7 @@ or
 ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ratus.flub78.net
 ```
 
-
+### Documentation reference
 https://linuxbeast.com/tutorials/aws/ssh-without-password-on-linux-amazon-ec2-ubuntu/
 
 
@@ -51,6 +51,9 @@ https://linuxbeast.com/tutorials/aws/ssh-without-password-on-linux-amazon-ec2-ub
 
 Terraform generates an ansible inventory named hosts and an ansible.setenv file to pass information from
 terraform to ansible.
+
+    cat hosts
+    source ansible.setenv
 
 
 ### Test

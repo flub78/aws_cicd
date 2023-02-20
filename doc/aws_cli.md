@@ -6,10 +6,11 @@
     sudo apt install awscli
 
 On WSL
+
     frederic@LAPTOP-57QER3OP:~$ aws --version
     aws-cli/1.22.34 Python/3.10.6 Linux/5.15.79.1-microsoft-standard-WSL2 botocore/1.23.34
 
-On pastille
+On a linux Mint fanless machine
 
     frederic@pastille:~/cicd$ aws --version
     aws-cli/1.18.69 Python/3.6.9 Linux/4.15.0-54-generic botocore/1.16.19
@@ -37,7 +38,7 @@ Security Items are managed in the IAM service (Identity and Access Management).
     aws configure
     AWS Access Key ID [None]: AKIAIOSFODNN7EXAMPLE
     AWS Secret Access Key [None]: wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY
-    Default region name [None]: us-west-2
+    Default region name [None]: us-west-3
     Default output format [None]: json
 
 It is only possible to create two access keys for a user. You must delete one if you want to create another one. And the secrete key is only displayed during creation.

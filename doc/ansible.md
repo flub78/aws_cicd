@@ -48,18 +48,55 @@ The ansible vault password can be store in a file
 
 ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server.yml
 
-## Ansible roles
+## Ansible Playbooks Description
 
-- check_access is just a role to test the connection and capacity to act as root.
-- apache install an HTTP server
-- https configure apache to support HTTPS
-- mysql insall a database
-- php install the php environment
-- php_tools install the static analyzer
-- jenkins install jenkins and its modules
+- test_connection.ym -	test ansible access to a node
+- lamp.yml -				install Apache, MySQL and PHP
+- jenkins.yml -			install jenkins
+- jenkins_jobs_multi -	Create the jobs for the multitenant project
+- jenkins_jobs_gvv - Create the jobs for gvv	 
 
-## Ansible playbooks
+## Ansible roles Description
 
-```
-ansible-playbook test_connection.yml  --key-file $TF_VAR_PRIVATE_KEY
-```
+### check_access
+
+	Check that ansible can access a node and sudo as root
+
+### apache
+
+[How To Install the Apache Web Server on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04#step-5-%E2%80%94-setting-up-virtual-hosts-recommended)
+
+- Install the Apache web server
+- Create a virtual host for a domain
+
+### https
+
+[How To Secure Apache with Let's Encrypt on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04)
+
+- Create a lets-encrypt certificate and configure Apache for https
+
+### mysql
+
+- Install a database server
+
+### php
+- Install php (currently 8.1 but I'll need to have it configurable)
+
+### jdk
+- Java JDK
+
+### jenkins
+- Jenkins
+
+### phptools
+- The PHP static analyzer tools
+
+### jenkins_jobs_xxx
+
+- The jenkins jobs for the project project xxx 
+
+### Detailed description of some roles
+
+  - [https role](https_role.md)
+  - [mysql role](mysql_role.md)
+

@@ -31,25 +31,16 @@ $ terraform state list
 aws_instance.app_server
 ```
 
-## Creation of an EC2 instance with ssh access
+## Description of the infrastructure provisioning contexts
 
-### RSA key creation
+### infras/jenkins
 
-```
-# create a directory to store the keys
-mkdir .ssh
-chmod 700 .ssh
-
-# add it to .gitignore
-
-# Generate the key with no passphrase
-ssh-keygen -t rsa -f $TF_VAR_PRIVATE_KEY
-
-chmod 400 .ssh/*
-```
-
-### Login to the EC2 instance
-
-```
-ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ec2-35-181-154-234.eu-west-3.compute.amazonaws.com
-```
+Create a generic web server:
+- an EC2 instance
+- a key pair for ssh access
+- a security groups with usual ports open
+- an initial python web server
+- an alarm to shut down unloaded instances
+- a route to access the EC2 instance with a domain name
+- a hosts file (ansible inventory)
+- a file to setup environment variables used by ansible (ansible.setenv)
