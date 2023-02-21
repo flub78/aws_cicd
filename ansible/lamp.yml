@@ -10,9 +10,9 @@
   become_user: root
 
   roles:
-    - apache
+  #  - apache
   #  - python
-  #  - https
+    - https
   #  - mysql
   #  - php
   #  - phpmyadmin
