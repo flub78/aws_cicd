@@ -21,6 +21,7 @@
     - name: stop apache2
       service: name=apache2 state=stopped  
 
+# The following step is currently commented out because it generates an eoor when the certificate has alredy been generated for a domain. Todo: make it idempotent
 #    - name: generate certificate
 #      become: yes
 #      command: certbot certonly --standalone --non-interactive --email frederic.peignot@free.fr --agree-tos -d {{lookup('env','INFRA_DOMAIN')}}
@@ -37,18 +38,6 @@
         - "Apache configuration file: {{apache_conf_file}}"
         - "SSL certificate file: {{ssl_cert_file}}"
         - "SSL key file: {{ssl_key_file}}"
-
-#    - name: Update Apache configuration to enable HTTPS
-#      lineinfile:
-#        path: "{{ apache_conf_file }}"
-#        regexp: "{{item.regexp}}"
-#        line: "{{item.line}}"
-#        state: present
-#      loop:
-#        - {regexp: "^SSLCertificateFile.*$", line: "SSLCertificateFile {{ ssl_cert_file }}", state: present}
-#        - {regexp: "^SSLCertificateKeyFile.*$", line: "SSLCertificateKeyFile {{ ssl_key_file }}"}          
-#      notify:
-#        - restart apache2
 
     - name: Update Apache configuration to enable HTTPS
       lineinfile:
@@ -73,4 +62,29 @@
 
 # Create virtual hosts
 
+# Create an apache configuration file for each domain
+    - name: Create an apache configuration file for each domain
+      template:
+        src: "templates/vhost_ssl.conf.j2"
+        dest: "/etc/apache2/sites-available/{{lookup('env','INFRA_DOMAIN')}}.conf"
+        mode: u=rw,g=r,o=r
+
+# Enable the virtual host
+    - name: Enable the virtual host
+      shell: "a2ensite {{lookup('env','INFRA_DOMAIN')}}"
+      register: a2ensite
+      changed_when: "'already enabled' not in a2ensite.stdout"
+      notify:
+        - restart apache2
+
 # Test HTTPS access
+    - name: check that the server can be reached
+      uri:
+        url: "https://{{lookup('env','INFRA_DOMAIN')}}"
+        follow_redirects: yes
+
+    - name:  check that the server can be reached, copy default page in /tmp
+      get_url:
+        url:  "https://{{lookup('env','INFRA_DOMAIN')}}"
+        dest: /tmp/index.html
+        timeout: 30
