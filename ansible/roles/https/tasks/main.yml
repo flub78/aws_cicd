@@ -77,6 +77,17 @@
       notify:
         - restart apache2
 
+# Disable the default host
+    - name: Disable the default ssl
+      shell: "a2dissite default-ssl"
+      register: a2dissite
+      changed_when: "'already disabled' not in a2dissite.stdout"
+      notify:
+        - restart apache2
+
+    - name: restart apache2
+      service: name=apache2 state=restarted  
+
 # Test HTTPS access
     - name: check that the server can be reached
       uri:
