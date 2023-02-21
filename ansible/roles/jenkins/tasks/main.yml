@@ -28,3 +28,11 @@
       url: "{{ jenkins_server }}"
       username: "{{ jenkins_user }}"
       password: "{{ jenkins_password }}"
+
+  - name: Log the installation state  
+    lineinfile:
+      dest: /home/ubuntu/installed.txt
+      line: "{{ lookup('pipe', 'date') }} -> jenkins installed"
+      state: present
+      insertafter: EOF
+      create: True

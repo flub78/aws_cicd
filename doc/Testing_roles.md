@@ -38,7 +38,7 @@ Once that the DNS table have been updated it is possible to use the full domain 
 
 ## Testing https
 
-
+    https://ratus.flub78.net
 
 ## Testing MySql
 
@@ -70,3 +70,7 @@ Zend Engine v4.1.16, Copyright (c) Zend Technologies
     http://ratus.flub78.net/index.php
 
 ## Testing phpmyadmin
+
+    https://ratus.flub78.net/phpmyadmin/
+
+    root + password

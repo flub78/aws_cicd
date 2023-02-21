@@ -61,3 +61,11 @@
       shell: "a2dissite 000-default"
       register: a2dissite
       changed_when: "'already disabled' not in a2dissite.stdout"
+
+    - name: Log the installation state
+      lineinfile:
+        dest: /home/ubuntu/installed.txt
+        line: "{{ lookup('pipe', 'date') }} -> apache configured"
+        state: present
+        insertafter: EOF
+        create: True

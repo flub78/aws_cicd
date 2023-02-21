@@ -8,3 +8,10 @@
       pip:
         name: python-jenkins
 
+    - name: Log the installation state
+      lineinfile:
+        dest: /home/ubuntu/installed.txt
+        line: "{{ lookup('pipe', 'date') }} -> python and pip installed"
+        state: present
+        insertafter: EOF
+        create: True

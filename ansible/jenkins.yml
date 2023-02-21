@@ -3,7 +3,7 @@
 - name: Installing a continuous integration server
 
   gather_facts: true
-  hosts: jenkins
+  hosts: "{{ lookup('env','INFRA_HOST') }}"
 
   become: yes
   become_method: sudo

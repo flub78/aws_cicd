@@ -27,6 +27,7 @@
       dest: "/var/www/{{lookup('env','INFRA_DOMAIN')}}/phpmyadmin"
       state: link
 
+
 #  - name: Configure Apache for phpMyAdmin
 #    become: yes
 #    template:
@@ -40,3 +41,11 @@
 #    command: a2ensite phpmyadmin.conf
 #    notify:
 #      - restart apache2
+
+  - name: Log the installation state
+    lineinfile:
+      dest: /home/ubuntu/installed.txt
+      line: "{{ lookup('pipe', 'date') }} -> phpmyadmin installed"
+      state: present
+      insertafter: EOF
+      create: True

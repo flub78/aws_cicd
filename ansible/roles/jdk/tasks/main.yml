@@ -6,3 +6,11 @@
     name:
       - openjdk-{{pl_jdk_version}}-jdk
     state: latest
+
+- name: Log the installation state
+  lineinfile:
+    dest: /home/ubuntu/installed.txt
+    line: "{{ lookup('pipe', 'date') }} -> jdk installed"
+    state: present
+    insertafter: EOF
+    create: True

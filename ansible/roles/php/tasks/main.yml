@@ -33,3 +33,11 @@
         - php8.1-fpm
         - libapache2-mod-php8.1
       state: latest
+
+  - name: Log the installation state
+    lineinfile:
+      dest: /home/ubuntu/installed.txt
+      line: "{{ lookup('pipe', 'date') }} -> php installed"
+      state: present
+      insertafter: EOF
+      create: True

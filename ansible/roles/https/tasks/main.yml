@@ -99,3 +99,11 @@
         url:  "https://{{lookup('env','INFRA_DOMAIN')}}"
         dest: /tmp/index.html
         timeout: 30
+
+    - name: Log the installation state
+      lineinfile:
+        dest: /home/ubuntu/installed.txt
+        line: "{{ lookup('pipe', 'date') }} -> https configured"
+        state: present
+        insertafter: EOF
+        create: True

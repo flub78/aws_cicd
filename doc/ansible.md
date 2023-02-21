@@ -19,10 +19,12 @@
 
 ## First communication with an EC2 instance
 
-create the file /etc/ansible/hosts on the control host
+Create the file /etc/ansible/hosts on the control host
 
 and fill it
-cat /etc/ansible/hosts
+
+    cat /etc/ansible/hosts
+```
 [jenkins]
         ubuntu@flub78.net
 
@@ -36,17 +38,19 @@ ubuntu@flub78.net | SUCCESS => {
 }
 
 ansible-playbook jenkins test_connection.yml
+```
 
 ## Ansible vault
 
 Some files containing private data are encrypted.
 
 They can be modified that way:
+
     ansible-vault edit roles/apache/vars/main.yml
 
 The ansible vault password can be store in a file
 
-ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server.yml
+    ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server.yml
 
 ## Ansible Playbooks Description
 
@@ -73,13 +77,15 @@ ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server
 
 [How To Secure Apache with Let's Encrypt on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-secure-apache-with-let-s-encrypt-on-ubuntu-18-04)
 
-- Create a lets-encrypt certificate and configure Apache for https
+- Create a lets-encrypt certificate
+- Create an https virtual host
 
 ### mysql
 
 - Install a database server
 
 ### php
+
 - Install php (currently 8.1 but I'll need to have it configurable)
 
 ### jdk
