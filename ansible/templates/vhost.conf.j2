@@ -1,0 +1,8 @@
+<VirtualHost *:80>
+    ServerAdmin webmaster@localhost
+    ServerName {{lookup('env','INFRA_DOMAIN')}}
+    ServerAlias www.{{lookup('env','INFRA_DOMAIN')}}
+    DocumentRoot /var/www/{{lookup('env','INFRA_DOMAIN')}}
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+</VirtualHost>

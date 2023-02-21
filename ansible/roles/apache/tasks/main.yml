@@ -40,3 +40,24 @@
         url:  "http://{{lookup('env','INFRA_DOMAIN')}}"
         dest: /tmp/index.html
         timeout: 30
+
+# Setting up virtual hosts
+
+# Create an apache configuration file for each domain
+    - name: Create an apache configuration file for each domain
+      template:
+        src: "templates/vhost.conf.j2"
+        dest: "/etc/apache2/sites-available/{{lookup('env','INFRA_DOMAIN')}}.conf"
+        mode: u=rw,g=r,o=r
+
+# Enable the virtual host
+    - name: Enable the virtual host
+      shell: "a2ensite {{lookup('env','INFRA_DOMAIN')}}"
+      register: a2ensite
+      changed_when: "'already enabled' not in a2ensite.stdout"
+
+# Disable the default host
+    - name: Disable the default host
+      shell: "a2dissite 000-default"
+      register: a2dissite
+      changed_when: "'already disabled' not in a2dissite.stdout"

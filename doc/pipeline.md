@@ -19,3 +19,5 @@ The minimal set of servers that I want to deploy is:
 ## [Terraform infrastucture provisioning](terraform.md)
 
 ## [Ansible Playbooks and Roles](ansible.md)
+
+## [Pipeline Testing](Testing_roles.md)

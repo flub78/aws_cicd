@@ -1,6 +1,8 @@
 # Ansible roles test plan
 
-## Test ssh access
+Minimal smoke test plan for the pipeline deployment.
+
+## Test ssh access to a node
 
 To test that an instance has been created use the command from the output.
 
@@ -26,7 +28,7 @@ Once that the DNS table have been updated it is possible to use the full domain 
 
     ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/test_connection.yml
 
-## Test Apache
+## Testing Apache
 
     http://ratus.flub78.net
     ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ratus.flub78.net
@@ -34,11 +36,11 @@ Once that the DNS table have been updated it is possible to use the full domain 
         grep ratus /var/www/ratus.flub78.net/index.html
         ls /etc/apache2/sites-enabled/
 
-## Test https
+## Testing https
 
 
 
-## Test MySql
+## Testing MySql
 
 ```
 sudo service mysql status
@@ -56,7 +58,7 @@ mysql> SHOW DATABASES;
 4 rows in set (0.01 sec)
 ``` 
 
-## Test PHP
+## Testing PHP
 ```
 php --version
 PHP 8.1.16 (cli) (built: Feb 14 2023 18:35:37) (NTS)
@@ -67,4 +69,4 @@ Zend Engine v4.1.16, Copyright (c) Zend Technologies
 
     http://ratus.flub78.net/index.php
 
-## Test phpmyadmin
+## Testing phpmyadmin
