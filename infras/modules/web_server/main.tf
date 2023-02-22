@@ -22,6 +22,6 @@ resource "aws_instance" "app_server" {
   user_data = <<-EOF
     #!/bin/bash
     echo "Hello, ${var.name} Flub78" > index.html
-    python3 -m http.server 8080 &
+    python3 -m http.server 8888 &
   EOF
 }

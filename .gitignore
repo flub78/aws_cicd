@@ -1,10 +1,7 @@
 python/__pycache__/
-infras/.infras/
-infras/jenkins/.infras/
-infras/jenkins/.ssh/terraform
-infras/jenkins/.ssh/terraform.pub
 infras/jenkins/terraform.tfstate
 infras/jenkins/terraform.tfstate.backup
 infras/jenkins/.terraform/
 infras/jenkins/hosts
 infras/jenkins/ansible.setenv
+infras/mina/

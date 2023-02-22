@@ -8,6 +8,7 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # http
   ingress {
     from_port   = 80
     to_port     = 80
@@ -15,6 +16,7 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Jenkins
   ingress {
     from_port   = 8080
     to_port     = 8080
@@ -22,6 +24,15 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # Python
+  ingress {
+    from_port   = 8888
+    to_port     = 8888
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]
+  }
+
+  # ssh
   ingress {
     from_port   = 22
     to_port     = 22
@@ -29,13 +40,15 @@ resource "aws_security_group" "sg" {
     cidr_blocks = ["0.0.0.0/0"]
   }
 
-    ingress {
+  # https
+  ingress {
     from_port   = 443
     to_port     = 443
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
 
+  # jenkins on https 
   ingress {
     from_port   = 8443
     to_port     = 8443

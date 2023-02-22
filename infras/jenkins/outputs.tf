@@ -15,10 +15,10 @@ output "domain_ssh_cmd" {
 
 output "http" {
   description = "url to access the app"
-  value       = "http://${module.routes.elastic_ip.public_dns}:8080"
+  value       = "http://${module.routes.elastic_ip.public_dns}:8888"
 }
 
 output "domain_http" {
   description = "url to access the app"
-  value       = "http://${var.subdomain}.${var.domain}:8080"
+  value       = "http://${var.subdomain}.${var.domain}:8888"
 }
