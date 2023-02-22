@@ -11,9 +11,9 @@ To test that an instance has been created use the command from the output.
 
 ## Test the basic web server
 
-For testing a minimal web server is installed on port 8080
+For testing a minimal web server is installed on port 8888
 
-http://ec2-35-180-72-146.eu-west-3.compute.amazonaws.com:8080/
+http://ec2-35-180-72-146.eu-west-3.compute.amazonaws.com:8888/
 
 ## Testing DNS
 
@@ -21,7 +21,7 @@ Once that the DNS table have been updated it is possible to use the full domain 
 
     ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ratus.flub78.net
 
-    http://ratus.flub78.net:8080
+    http://ratus.flub78.net:8888
 
 
 ## Testing basic ansible access
@@ -74,3 +74,18 @@ Zend Engine v4.1.16, Copyright (c) Zend Technologies
     https://ratus.flub78.net/phpmyadmin/
 
     root + password
+
+## Testing JDK installation
+
+    java -version
+
+## Testing jenkins
+
+    sudo service jenkins status
+
+    http://ratus.flub78.net:8080/
+
+    
+
+
+
