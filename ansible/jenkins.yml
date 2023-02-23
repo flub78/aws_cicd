@@ -11,8 +11,8 @@
 
   roles:
     #- jdk
-    #- jenkins
-    - phptools
+    - jenkins
+    #- phptools
 
   pre_tasks:
 

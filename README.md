@@ -27,6 +27,30 @@ Software required on the control node:
 - [Ansible Playbooks and Roles](doc/ansible.md)
 - [Jenkins](doc/jenkins.md)
 
+## Some external tutorials
+
+[Terraform Documentation](https://developer.hashicorp.com/terraform/docs)
+
+[Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)
+
+[Jenkins Documentation](https://www.jenkins.io/doc/)
+
+
+https://courses.morethancertified.com/p/devops-in-the-cloud
+
+https://www.devopsschool.com/blog/jenkins-commands-lines-reference-from-jenkins/
+
+https://www.sfgroups.com/jenkins/pipeline/create_job_using_groovyscript/
+
+
+## Videos
+
+[Jenkins 30 tutos](https://www.youtube.com/playlist?list=PLn6POgpklwWr19VXuoVgIr32HCu0MGNt9)
+
+[Tutorials et Formation Terraform](https://www.youtube.com/playlist?list=PLn6POgpklwWrpWnv05paAdqbFbV6gApHx)
+
+[Formation Ansible](https://www.youtube.com/playlist?list=PLn6POgpklwWoCpLKOSw3mXCqbRocnhrh-)
+
 
 
 

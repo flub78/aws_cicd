@@ -1,0 +1,19 @@
+---
+
+- name: Installing jenkins jobs for a Laravel project
+
+  gather_facts: true
+  hosts: "{{ lookup('env','INFRA_HOST') }}"
+
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  roles:
+    #- phptools
+    - jenkins_jobs
+
+  pre_tasks:
+
+    - name: test connection
+      ping:

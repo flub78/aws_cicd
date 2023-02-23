@@ -14,13 +14,13 @@ Secrets and credential are stored outside of the github project or kept encrypte
 
 Generate a RSA key that will be imported in a AWS key pair and for ssh and ansible connection.
 
-```
+```sh
 ssh-keygen -t rsa -f $TF_VAR_PRIVATE_KEY
 ```
 
 ## Infrastructure provisioning
 
-```
+```sh
 cd infras/jenkins
 terraform init
 terraform plan
@@ -33,7 +33,7 @@ By default this terraform configuration creates an EC2 instance that can be acce
 
 Once the instance is up and running it is possible to login using the default user and DNS address. To use the domain name wait for the DNS tables to be propagated.
 
-```
+```sh
 ssh -i $TF_VAR_PRIVATE_KEY ubuntu@ec2-52-47-144-86.eu-west-3.compute.amazonaws.com
 
 or
@@ -60,7 +60,7 @@ terraform to ansible.
 
 A simple command
 
-```java
+```sh
 ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/test_connection.yml
 
 PLAY [Network Getting Started First Playbook] ***********************************************************************************************************************************************
@@ -80,7 +80,7 @@ ubuntu@ratus.flub78.net      : ok=3    changed=1    unreachable=0    failed=0   
 
 ## Others playbooks
 
-```java
+```sh
 source ansible.setenv
 ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/lamp.yml
 ```
