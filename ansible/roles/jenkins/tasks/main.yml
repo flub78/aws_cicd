@@ -23,11 +23,10 @@
       state: latest
 
   - name: Install Jenkins plugin
-    jenkins_plugin:
+    community.general.jenkins_plugin:
       name: "phing"
-      url: "{{ jenkins_server }}"
-      username: "{{ jenkins_user }}"
-      password: "{{ jenkins_password }}"
+      url_username: "{{ jenkins_user }}"
+      url_password: "{{ jenkins_password }}"
 
   - name: Log the installation state  
     lineinfile:

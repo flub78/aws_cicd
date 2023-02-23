@@ -23,7 +23,7 @@ Software required on the control node:
 - [AWS](doc/aws.md)
 - [CI/CD Pipeline description](doc/pipeline.md)
 - [Step by step creation and population of an EC2 instance](doc/step_by_step.md)
-- [Terraform infrastucture provisioning](doc/terraform.md)
+- [Terraform infrastructure provisioning](doc/terraform.md)
 - [Ansible Playbooks and Roles](doc/ansible.md)
 - [Jenkins](doc/jenkins.md)
 

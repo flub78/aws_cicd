@@ -85,7 +85,15 @@ Zend Engine v4.1.16, Copyright (c) Zend Technologies
 
     http://ratus.flub78.net:8080/
 
-    
+## PHP tools
 
+```
+phing -version
+PHP Deprecated:  Creation of dynamic property Phing::$searchForThis is deprecated in phar:///usr/local/bin/phing/classes/phing/Phing.php on line 362
+Phing 2.17.4
+
+phploc --version
+phploc 7.0.2 by Sebastian Bergmann.
+```
 
 

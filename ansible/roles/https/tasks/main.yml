@@ -21,7 +21,8 @@
     - name: stop apache2
       service: name=apache2 state=stopped  
 
-# The following step is currently commented out because it generates an error when the certificate has alredy been generated for a domain. Todo: make it idempotent
+# The following step is currently commented out because it generates an error when the certificate has already been generated for a domain. 
+# TODO: make it idempotent
     - name: generate certificate
       become: yes
       command: certbot certonly --standalone --non-interactive --email frederic.peignot@free.fr --agree-tos -d {{lookup('env','INFRA_DOMAIN')}}

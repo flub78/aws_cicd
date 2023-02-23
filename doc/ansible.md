@@ -1,5 +1,14 @@
 # Ansible
 
+## Tutorials
+
+[ANSIBLE - Tutos & Formation : automatiser vos configurations
+(xavki)](https://www.youtube.com/playlist?list=PLn6POgpklwWoCpLKOSw3mXCqbRocnhrh-)
+
+[Latest Ansible Documentation](https://docs.ansible.com/ansible/latest/index.html)
+
+https://github.com/geerlingguy/ansible-role-jenkins/blob/master/tasks/plugins.yml
+
 ## Ansible installation
 
     sudo apt-get update
@@ -106,3 +115,4 @@ The ansible vault password can be store in a file
   - [https role](https_role.md)
   - [mysql role](mysql_role.md)
 
+## [Testing Ansible roles](Testing_roles.md)
