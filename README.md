@@ -36,11 +36,17 @@ Software required on the control node:
 [Jenkins Documentation](https://www.jenkins.io/doc/)
 
 
-https://courses.morethancertified.com/p/devops-in-the-cloud
+[Jenkins Configuration as Code (a.k.a. JCasC) Plugin](https://github.com/jenkinsci/configuration-as-code-plugin/blob/master/README.md)
 
-https://www.devopsschool.com/blog/jenkins-commands-lines-reference-from-jenkins/
+[DevOps in the Cloud with Terraform, Ansible, and Jenkins video course 29$](https://courses.morethancertified.com/p/devops-in-the-cloud/)
 
-https://www.sfgroups.com/jenkins/pipeline/create_job_using_groovyscript/
+[Jenkins command line reference](https://www.devopsschool.com/blog/jenkins-commands-lines-reference-from-jenkins/)
+
+[CREATE JENKINS JOB USING GROOVY SCRIPT](https://www.sfgroups.com/jenkins/pipeline/create_job_using_groovyscript/)
+
+
+[Ansible Jenkins Showcase](https://github.com/Azulinho/ansible-jenkins-showcase)
+
 
 
 ## Videos

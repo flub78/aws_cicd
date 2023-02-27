@@ -20,4 +20,6 @@ The minimal set of servers that I want to deploy is:
 
 ## [Ansible Playbooks and Roles](ansible.md)
 
-## [Pipeline Testing](Testing_roles.md)
+## [Jenkins Configuration](jenkins_configuration.md)
+
+## [Testing of the pipeline](Testing_roles.md)

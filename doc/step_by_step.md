@@ -83,4 +83,7 @@ ubuntu@ratus.flub78.net      : ok=3    changed=1    unreachable=0    failed=0   
 ```sh
 source ansible.setenv
 ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/lamp.yml
+
+ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/jenkins.yml
+
 ```

@@ -1,11 +1,25 @@
 ---
 # jenkins jobs
 
+  - name: Debug information
+    debug:
+      msg: 
+      - "Jenkins user: {{jenkins_user}}"
+      - "Jenkins password: {{jenkins_password}}"
+      - "Jenkins server: http://{{lookup('env','INFRA_DOMAIN')}}"
+
+  - name: Creates directory
+    file:
+      path: /var/lib/jenkins/jobs/test_ansible
+      owner: jenkins
+      group: jenkins
+      state: directory
+
   - name: Create a jenkins job using basic authentication
     community.general.jenkins_job:
-      config: "{{ lookup('file', 'templates/jenkins_job_laravel
-      .xml') }}"
+#      config: "{{ lookup('file', 'templates/job_laravel_static_analysis.xml.j2') }}"
+      config: "{{ lookup('file', 'templates/config.xml') }}"
       name: test_ansible
       password: "{{jenkins_password}}"
-      url: "{{jenkins_server}}"
+      url: "http://{{lookup('env','INFRA_DOMAIN')}}"
       user: "{{jenkins_user}}"

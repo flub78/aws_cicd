@@ -1,28 +1,13 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <project>
-  <actions/>
-  <description>Multitenant static analysis</description>
+  <description>Test job</description>
   <keepDependencies>false</keepDependencies>
-  <properties>
-    <com.coravy.hudson.plugins.github.GithubProjectProperty plugin="github@1.29.5">
-      <projectUrl>https://github.com/flub78/multitenant/</projectUrl>
-      <displayName></displayName>
-    </com.coravy.hudson.plugins.github.GithubProjectProperty>
-    <jenkins.model.BuildDiscarderProperty>
-      <strategy class="hudson.tasks.LogRotator">
-        <daysToKeep>-1</daysToKeep>
-        <numToKeep>10</numToKeep>
-        <artifactDaysToKeep>-1</artifactDaysToKeep>
-        <artifactNumToKeep>-1</artifactNumToKeep>
-      </strategy>
-    </jenkins.model.BuildDiscarderProperty>
-  </properties>
-  <scm class="hudson.plugins.git.GitSCM" plugin="git@4.2.0">
+  <properties/>
+  <scm class="hudson.plugins.git.GitSCM" plugin="git@5.0.0">
     <configVersion>2</configVersion>
     <userRemoteConfigs>
       <hudson.plugins.git.UserRemoteConfig>
         <url>https://github.com/flub78/multitenant.git</url>
-        <credentialsId>github</credentialsId>
       </hudson.plugins.git.UserRemoteConfig>
     </userRemoteConfigs>
     <branches>
@@ -31,7 +16,7 @@
       </hudson.plugins.git.BranchSpec>
     </branches>
     <doGenerateSubmoduleConfigurations>false</doGenerateSubmoduleConfigurations>
-    <submoduleCfg class="list"/>
+    <submoduleCfg class="empty-list"/>
     <extensions/>
   </scm>
   <canRoam>true</canRoam>
@@ -40,255 +25,7 @@
   <blockBuildWhenUpstreamBuilding>false</blockBuildWhenUpstreamBuilding>
   <triggers/>
   <concurrentBuild>false</concurrentBuild>
-  <builders>
-    <hudson.plugins.phing.PhingBuilder plugin="phing@0.13.3">
-      <buildFile>build-phing.xml</buildFile>
-      <targets>ci</targets>
-      <useModuleRoot>true</useModuleRoot>
-    </hudson.plugins.phing.PhingBuilder>
-  </builders>
-  <publishers>
-    <hudson.plugins.plot.PlotPublisher plugin="plot@2.1.4">
-      <plots>
-        <hudson.plugins.plot.Plot>
-          <title>Lines of code</title>
-          <yaxis></yaxis>
-          <series>
-            <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
-              <label></label>
-              <fileType>csv</fileType>
-              <colExclusionSet>
-                <int>2</int>
-                <int>3</int>
-                <int>4</int>
-                <int>5</int>
-                <int>6</int>
-                <int>7</int>
-              </colExclusionSet>
-              <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
-              <exclusionValues>2,3,4,5,6,7</exclusionValues>
-              <exclusionValuesList class="java.util.Arrays$ArrayList">
-                <a class="string-array">
-                  <string>2</string>
-                  <string>3</string>
-                  <string>4</string>
-                  <string>5</string>
-                  <string>6</string>
-                  <string>7</string>
-                </a>
-              </exclusionValuesList>
-              <url></url>
-              <displayTableFlag>false</displayTableFlag>
-            </hudson.plugins.plot.CSVSeries>
-          </series>
-          <group>Sizes</group>
-          <numBuilds></numBuilds>
-          <csvFileName>plot-5921814490842874369.csv</csvFileName>
-          <csvLastModification>0</csvLastModification>
-          <style>line</style>
-          <useDescr>false</useDescr>
-          <keepRecords>false</keepRecords>
-          <exclZero>false</exclZero>
-          <logarithmic>false</logarithmic>
-          <yaxisMinimum></yaxisMinimum>
-          <yaxisMaximum></yaxisMaximum>
-        </hudson.plugins.plot.Plot>
-        <hudson.plugins.plot.Plot>
-          <title>Number of classes</title>
-          <yaxis></yaxis>
-          <series>
-            <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
-              <label></label>
-              <fileType>csv</fileType>
-              <colExclusionSet>
-                <int>8</int>
-                <int>9</int>
-                <int>10</int>
-                <int>11</int>
-                <int>12</int>
-              </colExclusionSet>
-              <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
-              <exclusionValues>8,9,10,11,12</exclusionValues>
-              <exclusionValuesList class="java.util.Arrays$ArrayList">
-                <a class="string-array">
-                  <string>8</string>
-                  <string>9</string>
-                  <string>10</string>
-                  <string>11</string>
-                  <string>12</string>
-                </a>
-              </exclusionValuesList>
-              <url></url>
-              <displayTableFlag>false</displayTableFlag>
-            </hudson.plugins.plot.CSVSeries>
-          </series>
-          <group>Sizes</group>
-          <numBuilds></numBuilds>
-          <csvFileName>plot-15533944320756241474.csv</csvFileName>
-          <csvLastModification>0</csvLastModification>
-          <style>line</style>
-          <useDescr>false</useDescr>
-          <keepRecords>false</keepRecords>
-          <exclZero>false</exclZero>
-          <logarithmic>false</logarithmic>
-          <yaxisMinimum></yaxisMinimum>
-          <yaxisMaximum></yaxisMaximum>
-        </hudson.plugins.plot.Plot>
-        <hudson.plugins.plot.Plot>
-          <title>Number of methods</title>
-          <yaxis></yaxis>
-          <series>
-            <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
-              <label></label>
-              <fileType>csv</fileType>
-              <colExclusionSet>
-                <int>16</int>
-                <int>17</int>
-                <int>18</int>
-                <int>15</int>
-              </colExclusionSet>
-              <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
-              <exclusionValues>15,16,17,18</exclusionValues>
-              <exclusionValuesList class="java.util.Arrays$ArrayList">
-                <a class="string-array">
-                  <string>15</string>
-                  <string>16</string>
-                  <string>17</string>
-                  <string>18</string>
-                </a>
-              </exclusionValuesList>
-              <url></url>
-              <displayTableFlag>false</displayTableFlag>
-            </hudson.plugins.plot.CSVSeries>
-          </series>
-          <group>Sizes</group>
-          <numBuilds></numBuilds>
-          <csvFileName>plot-18260805832939123940.csv</csvFileName>
-          <csvLastModification>0</csvLastModification>
-          <style>line</style>
-          <useDescr>false</useDescr>
-          <keepRecords>false</keepRecords>
-          <exclZero>false</exclZero>
-          <logarithmic>false</logarithmic>
-          <yaxisMinimum></yaxisMinimum>
-          <yaxisMaximum></yaxisMaximum>
-        </hudson.plugins.plot.Plot>
-        <hudson.plugins.plot.Plot>
-          <title>Lengths</title>
-          <yaxis></yaxis>
-          <series>
-            <hudson.plugins.plot.CSVSeries>
-              <file>build/logs/phploc.csv</file>
-              <label></label>
-              <fileType>csv</fileType>
-              <colExclusionSet>
-                <int>24</int>
-                <int>25</int>
-                <int>26</int>
-                <int>27</int>
-                <int>28</int>
-                <int>14</int>
-              </colExclusionSet>
-              <inclusionFlag>INCLUDE_BY_COLUMN</inclusionFlag>
-              <exclusionValues>14,24,25,26,27,28</exclusionValues>
-              <exclusionValuesList class="java.util.Arrays$ArrayList">
-                <a class="string-array">
-                  <string>14</string>
-                  <string>24</string>
-                  <string>25</string>
-                  <string>26</string>
-                  <string>27</string>
-                  <string>28</string>
-                </a>
-              </exclusionValuesList>
-              <url></url>
-              <displayTableFlag>false</displayTableFlag>
-            </hudson.plugins.plot.CSVSeries>
-          </series>
-          <group>Sizes</group>
-          <numBuilds></numBuilds>
-          <csvFileName>plot-146297394328540616.csv</csvFileName>
-          <csvLastModification>0</csvLastModification>
-          <style>line</style>
-          <useDescr>false</useDescr>
-          <keepRecords>false</keepRecords>
-          <exclZero>false</exclZero>
-          <logarithmic>false</logarithmic>
-          <yaxisMinimum></yaxisMinimum>
-          <yaxisMaximum></yaxisMaximum>
-        </hudson.plugins.plot.Plot>
-      </plots>
-    </hudson.plugins.plot.PlotPublisher>
-    <htmlpublisher.HtmlPublisher plugin="htmlpublisher@1.21">
-      <reportTargets>
-        <htmlpublisher.HtmlPublisherTarget>
-          <reportName>Source Code Documentation</reportName>
-          <reportDir>build/doc</reportDir>
-          <reportFiles>index.html</reportFiles>
-          <alwaysLinkToLastBuild>false</alwaysLinkToLastBuild>
-          <reportTitles></reportTitles>
-          <keepAll>false</keepAll>
-          <allowMissing>false</allowMissing>
-          <includes>**/*</includes>
-          <escapeUnderscores>true</escapeUnderscores>
-        </htmlpublisher.HtmlPublisherTarget>
-      </reportTargets>
-    </htmlpublisher.HtmlPublisher>
-    <io.jenkins.plugins.analysis.core.steps.IssuesRecorder plugin="warnings-ng@7.3.0">
-      <analysisTools>
-        <io.jenkins.plugins.analysis.warnings.Pmd>
-          <id></id>
-          <name></name>
-          <pattern>build/logs/md.xml</pattern>
-          <reportEncoding></reportEncoding>
-          <skipSymbolicLinks>false</skipSymbolicLinks>
-        </io.jenkins.plugins.analysis.warnings.Pmd>
-        <io.jenkins.plugins.analysis.warnings.Cpd>
-          <id></id>
-          <name></name>
-          <pattern>build/logs/phpcpd.xml</pattern>
-          <reportEncoding></reportEncoding>
-          <skipSymbolicLinks>false</skipSymbolicLinks>
-          <highThreshold>50</highThreshold>
-          <normalThreshold>25</normalThreshold>
-        </io.jenkins.plugins.analysis.warnings.Cpd>
-        <io.jenkins.plugins.analysis.warnings.checkstyle.CheckStyle>
-          <id></id>
-          <name></name>
-          <pattern>build/checkstyle.xml</pattern>
-          <reportEncoding></reportEncoding>
-          <skipSymbolicLinks>false</skipSymbolicLinks>
-        </io.jenkins.plugins.analysis.warnings.checkstyle.CheckStyle>
-      </analysisTools>
-      <sourceCodeEncoding></sourceCodeEncoding>
-      <sourceDirectory></sourceDirectory>
-      <ignoreQualityGate>false</ignoreQualityGate>
-      <ignoreFailedBuilds>true</ignoreFailedBuilds>
-      <referenceJobName>-</referenceJobName>
-      <failOnError>false</failOnError>
-      <healthy>0</healthy>
-      <unhealthy>0</unhealthy>
-      <minimumSeverity plugin="analysis-model-api@7.0.4">
-        <name>LOW</name>
-      </minimumSeverity>
-      <filters/>
-      <isEnabledForFailure>false</isEnabledForFailure>
-      <isAggregatingResults>false</isAggregatingResults>
-      <isBlameDisabled>false</isBlameDisabled>
-      <isForensicsDisabled>false</isForensicsDisabled>
-      <qualityGates/>
-      <trendChartType>AGGREGATION_TOOLS</trendChartType>
-    </io.jenkins.plugins.analysis.core.steps.IssuesRecorder>
-  </publishers>
-  <buildWrappers>
-    <hudson.plugins.ws__cleanup.PreBuildCleanup plugin="ws-cleanup@0.38">
-      <deleteDirs>false</deleteDirs>
-      <cleanupParameter></cleanupParameter>
-      <externalDelete></externalDelete>
-      <disableDeferredWipeout>false</disableDeferredWipeout>
-    </hudson.plugins.ws__cleanup.PreBuildCleanup>
-  </buildWrappers>
+  <builders/>
+  <publishers/>
+  <buildWrappers/>
 </project>
