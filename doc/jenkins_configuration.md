@@ -1,13 +1,15 @@
 # Jenkins Configuration
 
-Jenkins should be configured with no GUI or user interaction. It should follow the configuration as code principles.
+This part is still a job in progress. I am experimenting miscellaneous solution of jenkins configuration "as code".
+
+Jenkins should be configured with no GUI or user interactions.
 
 The required configuration steps are:
 - Creating a jenkins user
 - adding the required jenkins modules
 - creating the jenkins jobs.
 
-I am not sure yet of the best way to put that in place. I had some trouble with the ansible jenkins_job module. The Jenkins configuration as code plugin is not perfectly trivial and cannot install modules. So there is still work to do to be able to get a fully automated jenkins configuration
+I have some trouble with the ansible jenkins_job module. The Jenkins configuration as code plugin is not as trivial than presented and cannot install jenkins modules. I am looking for a simple solution with low learning curve and have a preference for DSL approach compared to XML edition or a complex API. If possible I'd prefer a unique tool for jenkins configuration and job creation instead of mixing ansible jenkins cli and jenkins plugins.
 
 ## Jenkins user creation
 
@@ -16,6 +18,42 @@ Currently done manually once jenkins is installed. A token has also been created
 TODO: automate jenkins user creation
 
 TODO: automate jenkins user token creation
+
+
+## Tools comparison
+
+### Configuration as code
+
+pro: 
+- look promising
+- DSL approach
+
+cons: My first attempt resulted on an error with an angry red jenkins and not a single explanation ...
+
+### Ansible jenkins module
+
+pro: 
+look promising
+
+cons: 
+- XML editing for job creation
+
+### Jenkins CLI
+
+pro:
+- easy to use
+- support everything which is possible with jenkins
+
+cons:
+- Job creation by providing XML files
+
+### Jenkins DSL job plugin
+
+pro:
+- based on DSL
+
+cons:
+- you have to bootstrap
 
 ## Jenkins CLI tools
 
@@ -44,5 +82,4 @@ java -jar jenkins-cli.jar -s http://ratus.flub78.net:8080/ -auth @jenkins_token 
 		
 java -jar jenkins-cli.jar -s http://ratus.flub78.net:8080/ -auth @jenkins_token list-jobs
 ```
-
 

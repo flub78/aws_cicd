@@ -14,7 +14,10 @@ https://github.com/geerlingguy/ansible-role-jenkins/blob/master/tasks/plugins.ym
 ## Ansible installation
 
     sudo apt-get update
-    sudo apt install ansible-core
+    # There is no mysql_user: with ansible-core...
+    # sudo apt install ansible-core
+    # The ansible package includes the Ansible language and runtime plus a range of community curated Collections
+    # Some of these collections are used in this project.
     sudo apt install ansible
     ansible --version
     ansible [core 2.12.0]
