@@ -1,40 +1,41 @@
 ---
 # tasks file for jenkins
 
-  # - name: Import jenkins key from url
-  #   ansible.builtin.apt_key:
-  #     state: present
-  #     url: https://pkg.jenkins.io/redhat-stable/jenkins.io.key  
+  - name: Import jenkins key from url
+    ansible.builtin.apt_key:
+      state: present
+      url: https://pkg.jenkins.io/redhat-stable/jenkins.io.key  
 
-  # # sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' 
-  # - name: Add the jenkins repository
-  #   apt_repository:
-  #     repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
-  #     state: present
+  # sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list' 
+  - name: Add the jenkins repository
+    apt_repository:
+      repo: 'deb https://pkg.jenkins.io/debian-stable binary/'
+      state: present
   
-  # - name: Update package cache
-  #   apt:
-  #     update_cache: yes
+  - name: Update package cache
+    apt:
+      update_cache: yes
 
-  # - name: Install jenkins
-  #   apt:
-  #     name:
-  #       - jenkins
-  #     state: latest
+  - name: Install jenkins
+    apt:
+      name:
+        - jenkins
+      state: latest
 
-  - name: Install Jenkins phing plugin
-    community.general.jenkins_plugin:
-      url_username: "{{ jenkins_user }}"
-      url_password: "{{ jenkins_password }}"
-      name: "phing"
-      state: "latest"
+# I have troubles with the jenkins plugin module, so I'm using the jenkins CLI to install the plugins
+  # - name: Install Jenkins phing plugin
+  #   community.general.jenkins_plugin:
+  #     url_username: "{{ jenkins_user }}"
+  #     url_password: "{{ jenkins_password }}"
+  #     name: "phing"
+  #     state: "latest"
     
-  - name: Install Jenkins HTML Publisher plugin
-    community.general.jenkins_plugin:
-      url_username: "{{ jenkins_user }}"
-      url_password: "{{ jenkins_password }}"
-      name: "htmlpublisher"
-      state: "latest"
+  # - name: Install Jenkins HTML Publisher plugin
+  #   community.general.jenkins_plugin:
+  #     url_username: "{{ jenkins_user }}"
+  #     url_password: "{{ jenkins_password }}"
+  #     name: "htmlpublisher"
+  #     state: "latest"
 
   - name: Log the installation state  
     lineinfile:

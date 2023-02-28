@@ -109,6 +109,8 @@ The ansible vault password can be store in a file
 
     https://www.hostinger.com/tutorials/how-to-install-and-setup-phpmyadmin-on-ubuntu
 
+    https://tecadmin.net/switch-between-multiple-php-version-on-debian/
+
 For an unknown reason the installation of phpmyadmin force the installation of some php 8.2 modules for CLI.
 
 ```sh

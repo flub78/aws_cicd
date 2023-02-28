@@ -10,11 +10,11 @@
   become_user: root
 
   roles:
-    #- apache
-    #- python
-    #- https
-    #- mysql
-    #- php
+    - apache
+    - python
+    - https
+    - mysql
+    - php
     - phpmyadmin
 
   pre_tasks:

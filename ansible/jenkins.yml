@@ -10,9 +10,9 @@
   become_user: root
 
   roles:
-    #- jdk
+    - jdk
     - jenkins
-    #- phptools
+    - phptools
 
   pre_tasks:
 
