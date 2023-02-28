@@ -40,6 +40,8 @@ Once that the DNS table have been updated it is possible to use the full domain 
 
     https://ratus.flub78.net
 
+    https://ratus.flub78.net/info.php
+
 ## Testing MySql
 
 ```

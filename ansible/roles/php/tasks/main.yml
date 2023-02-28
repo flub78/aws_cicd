@@ -35,6 +35,11 @@
         - libapache2-mod-php{{php_version}}
       state: latest
 
+  - name: install a test php example
+    template:
+      src: "templates/info.php.j2"
+      dest: "/var/www/{{lookup('env','INFRA_DOMAIN')}}/info.php"
+
   - name: Log the installation state
     lineinfile:
       dest: /home/ubuntu/installed.txt

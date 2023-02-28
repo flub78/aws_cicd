@@ -83,6 +83,8 @@ The ansible vault password can be store in a file
 
 [How To Install the Apache Web Server on Ubuntu 18.04](https://www.digitalocean.com/community/tutorials/how-to-install-the-apache-web-server-on-ubuntu-18-04#step-5-%E2%80%94-setting-up-virtual-hosts-recommended)
 
+[How To Install Linux, Apache, MySQL, PHP (LAMP) Stack on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-install-linux-apache-mysql-php-lamp-stack-on-ubuntu-22-04)
+
 - Install the Apache web server
 - Create a virtual host for a domain
 
@@ -100,6 +102,22 @@ The ansible vault password can be store in a file
 ### php
 
 - Install php (currently 8.1 but I'll need to have it configurable)
+
+### phpmyadmin
+
+    https://www.digitalocean.com/community/tutorials/how-to-install-and-secure-phpmyadmin-on-ubuntu-22-04
+
+    https://www.hostinger.com/tutorials/how-to-install-and-setup-phpmyadmin-on-ubuntu
+
+For an unknown reason the installation of phpmyadmin force the installation of some php 8.2 modules for CLI.
+
+```sh
+update-alternatives --list
+update-alternatives --set php /usr/bin/php8.1
+
+php -version
+PHP 8.1.16 (cli) (built: Feb 14 2023 18:35:37) (NTS)
+```
 
 ### jdk
 - Java JDK

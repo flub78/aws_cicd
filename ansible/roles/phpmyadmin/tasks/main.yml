@@ -6,7 +6,7 @@
     apt:
       name:
         - phpmyadmin
-      state: latest
+      state: present
 
 # From this point there are two ways to configure phpmyadmin
 # Either as a subdomain which implies
@@ -27,6 +27,8 @@
       dest: "/var/www/{{lookup('env','INFRA_DOMAIN')}}/phpmyadmin"
       state: link
 
+  - name: Restore php 8.1 as default
+    ansible.builtin.shell: update-alternatives --set php /usr/bin/php8.1
 
 #  - name: Configure Apache for phpMyAdmin
 #    become: yes
