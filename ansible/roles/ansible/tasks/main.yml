@@ -1,0 +1,13 @@
+    - name: install ansible
+      apt: 
+        pkg:
+          - ansible
+#          - python3-dnf
+
+    - name: Log ansible installation state
+      lineinfile:
+        dest: /home/ubuntu/installed.txt
+        line: "{{ lookup('pipe', 'date') }} -> ansible installed"
+        state: present
+        insertafter: EOF
+        create: True

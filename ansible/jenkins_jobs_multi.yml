@@ -10,8 +10,8 @@
   become_user: root
 
   roles:
-    #- phptools
-    - jenkins_jobs
+    - phptools
+    #- jenkins_jobs
 
   pre_tasks:
 
