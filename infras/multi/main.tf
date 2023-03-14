@@ -16,20 +16,6 @@ provider "aws" {
    so we don't need to create them again
 */
 
-/*
-module "ssh_key" {
-  source = "../modules/ssh_key"
-  basename = var.basename
-  public_key = var.PUBLIC_KEY
-}
-
-module "sg" {
-  source = "../modules/security_group"
-  basename = var.basename
-  # ingress_ports = var.ingress_ports
-}
-*/
-
 data "aws_security_group" "sg" {
     name = "tf-ratus_sg"
 }
@@ -51,6 +37,26 @@ module "routes" {
   domain = var.domain
   subdomain = var.subdomain
   server_id = module.webserver.ec2.id
+}
+
+# a route for the application
+# resource block for route53 record #
+data "aws_route53_zone" "primary" {
+  name = var.domain
+}
+
+data "aws_eip" "web_server_eip" {
+  tags = {
+    Name = "${var.basename}_eip"
+  }
+}
+
+resource "aws_route53_record" "root" {
+  zone_id = data.aws_route53_zone.primary.zone_id
+  name    = "webapp.${var.subdomain}.${var.domain}"
+  type    = "A"
+  ttl    = "300"
+  records = [data.aws_eip.web_server_eip.public_ip]
 }
 
 module "alarms" {

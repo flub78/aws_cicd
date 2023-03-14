@@ -1,8 +1,8 @@
 # resource block for elastic ip #
 resource "aws_eip" "web_server_eip" {
   instance = var.server_id
-  vpc      = true
-    tags = {
+  vpc = true
+  tags = {
     Name = "${var.basename}_eip"
   }
 }
