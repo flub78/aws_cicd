@@ -5,7 +5,8 @@
   </head>
   <body>
     <?php
-        echo "Welcome to {{lookup('env','INFRA_DOMAIN')}} !";
+        echo '<h3>' . "Welcome to {{lookup('env','INFRA_DOMAIN')}} !" . '</h3>';
+        echo '<p>' . "current user = " . get_current_user() . '</p>';
         phpinfo();
     ?>
   </body>
