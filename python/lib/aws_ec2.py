@@ -119,11 +119,10 @@ def ec2_print_list(list, verbose=False):
                 if (tag['Key'] == 'Name'):
                         name = tag['Value']
         
-        print(name)
+        print(name, ' ' + instance['State']['Name'])
         print("\t" + instance['ImageId'])
         print("\t" + instance['InstanceType'])
         print("\t" + instance['KeyName'] if 'KeyName' in instance else "") 
-        print("\t" + instance['State']['Name'])
         print("\t" + instance['Placement']['AvailabilityZone'])
         print("\t" + instance['PublicDnsName'])
 
