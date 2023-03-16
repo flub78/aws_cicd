@@ -19,6 +19,13 @@ On a linux Mint fanless machine
 
     https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html
 
+    curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+    unzip awscliv2.zip
+    sudo ./aws/install
+
+    $ aws --version
+    aws-cli/2.11.3 Python/3.11.2 Linux/5.15.90.1-microsoft-standard-WSL2 exe/x86_64.ubuntu.22 prompt/off
+
 ## AWS CLI documentation
 
     https://awscli.amazonaws.com/v2/documentation/api/latest/reference/index.html#synopsis
@@ -53,3 +60,14 @@ it is possible to manage several profiles with the option --profile
     $ aws s3 ls
     $ aws ec2 describe-instances
     $ aws ec2 describe-key-pairs
+
+## Troubleshooting
+
+    https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-troubleshooting.html#general-debug
+
+### Warning if the WSL date becomes out of sync with the current date AWS CLI can reject the credentials.
+
+In this case type:
+
+    sudo hwclock -s
+

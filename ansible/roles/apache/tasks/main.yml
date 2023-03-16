@@ -30,6 +30,10 @@
         regexp: 'It works!'
         replace: "{{lookup('env','INFRA_DOMAIN')}}"
 
+    - name: Set a hostname
+      ansible.builtin.hostname:
+        name:  "tf-{{ lookup('env','INFRA_HOST') }}" 
+
     - name: check that the server can be reached
       uri:
         url: "http://{{lookup('env','INFRA_DOMAIN')}}"

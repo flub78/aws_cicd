@@ -8,7 +8,13 @@ infras/jenkins/ansible.setenv
 infras/multi/.terraform.lock.hcl
 infras/multi/terraform.tfstate
 infras/multi/terraform.tfstate.backup
-infras/multi/.terraform/modules/modules.json
 infras/multi/.terraform/
 infras/multi/hosts
 infras/multi/ansible.setenv
+
+infras/gvv/.terraform.lock.hcl
+infras/gvv/terraform.tfstate
+infras/gvv/terraform.tfstate.backup
+infras/gvv/.terraform/
+infras/gvv/hosts
+infras/gvv/ansible.setenv
