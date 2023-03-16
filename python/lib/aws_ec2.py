@@ -119,13 +119,14 @@ def ec2_print_list(list, verbose=False):
                 if (tag['Key'] == 'Name'):
                         name = tag['Value']
         
-        print(name, instance['InstanceId'], 
-              instance['InstanceType'],
-              instance['KeyName'] if 'KeyName' in instance else "", 
-              instance['State']['Name'],
-              instance['Placement']['AvailabilityZone'],
-              instance['PublicDnsName']
-        )
+        print(name)
+        print("\t" + instance['ImageId'])
+        print("\t" + instance['InstanceType'])
+        print("\t" + instance['KeyName'] if 'KeyName' in instance else "") 
+        print("\t" + instance['State']['Name'])
+        print("\t" + instance['Placement']['AvailabilityZone'])
+        print("\t" + instance['PublicDnsName'])
+
 
 def ec2_stop(list, verbose=False):
     """ Stop EC2 instances """
