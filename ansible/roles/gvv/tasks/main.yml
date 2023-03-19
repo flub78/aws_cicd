@@ -1,0 +1,74 @@
+# phpmyadmin role
+#
+# Install and configure gvv
+
+# =====================================================================================================
+
+  - name: Display context information
+    debug: 
+      msg:
+        - "GVV installation"
+        - "BASE_URL = {{ base_url }}"
+        - "INSTALLATION_PATH = {{ installation_path }}"
+
+  - name: install subversion
+    apt: name=subversion state=present
+
+  - name: delete the installation directory if it exists
+    file: 
+      path: "{{ installation_path }}" 
+      state: absent
+
+  - name: get the sources from subversion
+    subversion: 
+      repo: http://subversion.developpez.com/projets/gvv/trunk/gvv
+      dest: "{{ installation_path }}"
+
+  - name: create a database
+    mysql_db: 
+      name: "{{db_name}}"
+      state: present
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      login_host: localhost
+
+  # edit gvv/application/config/config.php
+  # set the domain name in application/config/config.php
+  - name:  base url in config/config.php
+    lineinfile:
+      dest:  '{{installation_path}}/application/config/config.php'
+      regexp: 'base_url'
+      line: "$config['base_url']     = '{{base_url}}';"
+
+  # setup user in application/config/database
+  - name: setup config/database.php
+    lineinfile:
+       dest:  '{{installation_path}}/application/config/database.php'
+       regexp: 'gvv_user'
+       line: "$db['default']['username'] = '{{db_user}}';"
+
+  # setup password in application/config/database
+  - name:  setup config/database.php
+    lineinfile:
+       dest:  '{{installation_path}}/application/config/database.php'
+       regexp: 'lfoyfgbj'
+       line: "$db['default']['password'] = '{{mysql_root_password }}';"
+
+  # setup database in application/config/database
+  - name:  setup config/database.php
+    lineinfile:
+       dest:  '{{installation_path}}/application/config/database.php'
+       regexp: 'gvv2'
+       line: "$db['default']['database'] = '{{db_name}}';"
+
+    # set permissions on the files
+    # Display the installation APP_URL
+
+  - name: Log the installation state
+    lineinfile:
+      dest: /home/ubuntu/installed.txt
+      line: "{{ lookup('pipe', 'date') }} -> gvv installed"
+      state: present
+      insertafter: EOF
+      create: True
+

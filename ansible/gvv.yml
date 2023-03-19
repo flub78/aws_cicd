@@ -1,0 +1,24 @@
+---
+#
+# Install GVV on a LAMP server
+#
+
+- name: Installing GVV
+
+  gather_facts: true
+  hosts: "{{ lookup('env','INFRA_HOST') }}"
+
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  vars:
+    app_domain: "{{ lookup('env','INFRA_DOMAIN') }}"
+    base_url: "https://{{ app_domain }}/gvv"
+    installation_path: "/var/www/{{ app_domain }}/gvv"
+
+    db_name: "gvv"
+    db_user: "root"
+
+  roles:
+    - gvv    
