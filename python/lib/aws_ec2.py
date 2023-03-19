@@ -22,7 +22,7 @@ def ec2_select_ids(verbose = False, name="", id="", filter=""):
     response = ec2_client.describe_instances()
 
     if verbose:
-        print("EC2 instances")
+        print("EC2 instances:")
     list = []   
     ids = []
     for reservation in response['Reservations']:
@@ -120,11 +120,12 @@ def ec2_print_list(list, verbose=False):
                         name = tag['Value']
         
         print(name, ' ' + instance['State']['Name'])
-        print("\t" + instance['ImageId'])
-        print("\t" + instance['InstanceType'])
-        print("\t" + instance['KeyName'] if 'KeyName' in instance else "") 
-        print("\t" + instance['Placement']['AvailabilityZone'])
-        print("\t" + instance['PublicDnsName'])
+        if verbose:
+            print("\t" + instance['ImageId'])
+            print("\t" + instance['InstanceType'])
+            print("\t" + instance['KeyName'] if 'KeyName' in instance else "") 
+            print("\t" + instance['Placement']['AvailabilityZone'])
+            print("\t" + instance['PublicDnsName'])
 
 
 def ec2_stop(list, verbose=False):

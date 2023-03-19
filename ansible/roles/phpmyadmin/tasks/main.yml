@@ -2,11 +2,96 @@
 #
 # Install and configure phpmyadmin
 
+  - name: Display php version
+    debug:
+      msg: "PHP version  = {{ php_version }}"
+    
+  - name: Display php version 8
+    debug:
+      msg: "It is a version 8.x"
+    when: php_version >= 8.0
+
+  - name: Display php version 7
+    debug:
+      msg: "PHP version  it is a version 7.x"
+    when: php_version < 8.0
+
+# ===============================================================================================================
+# phpmyadmin can be installed from the disttribution repository only if php version is >= 8.0
   - name: Install phpmyadmin
     apt:
       name:
         - phpmyadmin
       state: present
+    when: php_version >= 8.0
+
+# With PHP version 7.x a manual installation has to be done
+
+# apt install unzip
+  - name: Install unzip
+    apt:
+      name:
+        - unzip
+      state: present
+    when: php_version < 8.0
+
+  - name:  Download phpMyAdmin zip file
+    get_url:
+      url: "https://files.phpmyadmin.net/phpMyAdmin/4.7.4/phpMyAdmin-4.7.4-all-languages.zip"
+      dest: /tmp/phpMyAdmin-4.7.4-all-languages.zip
+      timeout: 30
+    when: php_version < 8.0
+
+  - name: Unzip phpMyAdmin zip file
+    unarchive:
+      src: /tmp/phpMyAdmin-4.7.4-all-languages.zip
+      dest: /tmp
+      remote_src: yes
+    when: php_version < 8.0
+
+  - name: Delete /usr/share/phpmyadmin directory if it exists
+    ansible.builtin.file:
+      path: /usr/share/phpmyadmin
+      state: absent
+    when: php_version < 8.0
+
+  - name: Move phpMyAdmin-4.7.4-all-languages to /usr/share/phpmyadmin
+    ansible.builtin.shell: mv /tmp/phpMyAdmin-4.7.4-all-languages /usr/share/phpmyadmin
+    when: php_version < 8.0
+
+  - name: Restart php7.4-fpm
+    service:
+      name: php7.4-fpm
+      state: restarted
+    when: php_version < 8.0
+
+  - name: Restart apache2
+    service:
+      name: apache2
+      state: restarted
+    when: php_version < 8.0
+
+  - name: Copy config.sample.inc.php to config.inc.php
+    ansible.builtin.shell: cp /usr/share/phpmyadmin/config.sample.inc.php /usr/share/phpmyadmin/config.inc.php
+    when: php_version < 8.0
+
+  - name: Create phpmyadmin database
+    mysql_db:
+      name: phpmyadmin
+      login_user: root
+      login_password: "{{ mysql_root_password }}"
+      state: present
+    when: php_version < 8.0
+
+  - name: Replace line matching blowfish_secret in config.inc.php
+    lineinfile:
+      path: /usr/share/phpmyadmin/config.inc.php
+      regexp: 'blowfish_secret'
+      line: "$cfg['blowfish_secret'] = '{{mysql_root_password}}01234567890123456789012345678901';"
+    when: php_version < 8.0
+
+# ===============================================================================================================
+
 
 # From this point there are two ways to configure phpmyadmin
 # Either as a subdomain which implies
@@ -27,8 +112,8 @@
       dest: "/var/www/{{lookup('env','INFRA_DOMAIN')}}/phpmyadmin"
       state: link
 
-  - name: Restore php 8.1 as default
-    ansible.builtin.shell: update-alternatives --set php /usr/bin/php8.1
+  - name: Restore php {{ php_version }} as default
+    ansible.builtin.shell: update-alternatives --set php /usr/bin/php{{ php_version }}
 
 #  - name: Configure Apache for phpMyAdmin
 #    become: yes

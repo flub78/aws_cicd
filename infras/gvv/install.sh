@@ -10,7 +10,11 @@ source ansible.setenv
 ssh-keygen -f "/home/frederic/.ssh/known_hosts" -R "gvv.flub78.net"
 
 # Ansible roles lamp
-ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/lamp7.yml
+ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/lamp.yml
+
+
+# For debugging
+# ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/lamp.yml --tags "debug" --start-at-task="phpmyadmin : Display php version"	
 
 
 
