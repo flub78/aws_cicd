@@ -18,3 +18,4 @@ infras/gvv/terraform.tfstate.backup
 infras/gvv/.terraform/
 infras/gvv/hosts
 infras/gvv/ansible.setenv
+infras/jenkins/.terraform.lock.hcl

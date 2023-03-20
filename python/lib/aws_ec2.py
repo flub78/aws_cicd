@@ -121,6 +121,7 @@ def ec2_print_list(list, verbose=False):
         
         print(name, ' ' + instance['State']['Name'])
         if verbose:
+            print("\t" + instance['InstanceId'])
             print("\t" + instance['ImageId'])
             print("\t" + instance['InstanceType'])
             print("\t" + instance['KeyName'] if 'KeyName' in instance else "") 

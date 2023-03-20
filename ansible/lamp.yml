@@ -10,16 +10,16 @@
   become_user: root
 
   vars:
-    # php_version : 8.1
-    php_version: 7.4
+    php_version : 8.1
+    # php_version: 7.4
     blowfish_secret: "{{ lookup('blowfish_secret', '/dev/null length=32 chars=ascii_letters,digits') }}"
 
   roles:
-    #- apache
-    #- python
-    #- https
-    #- mysql
-    #- php
+    - apache
+    - python
+    - https
+    - mysql
+    - php
     - phpmyadmin
 
   pre_tasks:

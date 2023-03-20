@@ -1,3 +1,8 @@
+/**
+  * Main terraform script to create an EC2 machine for GVV testing
+  *
+  */
+
 terraform {
   required_providers {
     aws = {

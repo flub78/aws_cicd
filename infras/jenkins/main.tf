@@ -18,18 +18,24 @@ module "ssh_key" {
   public_key = var.PUBLIC_KEY
 }
 
+data "aws_security_group" "sg" {
+    name = "tf-ratus_sg"
+}
+/*
 module "sg" {
   source = "../modules/security_group"
   basename = var.basename
   # ingress_ports = var.ingress_ports
 }
+*/
 
 module "webserver" {
   source = "../modules/web_server" 
   name = var.basename
   ami = var.ami
   instance_type = var.instance_type
-  vpc_sg_id = module.sg.security_group.id
+  # vpc_sg_id = module.sg.security_group.id
+  vpc_sg_id = data.aws_security_group.sg.id
   key_name = module.ssh_key.key_pair.key_name
   user = var.user
   private_key = file(var.PRIVATE_KEY)

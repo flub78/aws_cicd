@@ -10,6 +10,8 @@ source ansible.setenv
 ssh-keygen -f "/home/frederic/.ssh/known_hosts" -R "jenkins.flub78.net"
 
 # Ansible roles, lamp, jenkins
+ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/test_connection.yml
+
 ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/lamp.yml
 
 ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/jenkins.yml
