@@ -52,3 +52,9 @@
     url: https://github.com/phpDocumentor/phpDocumentor/releases/download/v2.9.1/phpDocumentor.phar
     dest: /usr/local/bin/phpdoc
     mode: 'u=rwx,g=rx,o=rx'
+
+- name: Install GraphViz
+  apt:
+    name:
+      - graphviz
+    state: present

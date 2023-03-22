@@ -22,4 +22,5 @@
 
   roles:
     - phptools
-    #- gvv    
+    - gvv
+    - jre  

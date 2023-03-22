@@ -35,10 +35,11 @@ Jeton d'API (token)
 
 Add the token to a file with the format user:token
 
-alias jcli='java -jar jenkins-cli.jar -s http://jenkins.flub78.net:8080/ -auth @jenkins_token'
-
 ```
-~/jenkins-cli$ jcli who-am-i
+alias jenkins='java -jar jenkins-cli.jar -s http://jenkins.flub78.net:8080/ -auth @jenkins_token'
+
+
+~/jenkins-cli$ jenkins who-am-i
 Authenticated as: jenkins
 Authorities:
   authenticated
