@@ -15,6 +15,8 @@ ssh-keygen -f "/home/frederic/.ssh/known_hosts" -R "multi.flub78.net"
 # Ansible roles lamp
 ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/lamp.yml
 
+# Jenkins agent
+ansible-playbook --inventory hosts --key-file $TF_VAR_PRIVATE_KEY $PLAYBOOK/agent.yml
 
 
 

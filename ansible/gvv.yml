@@ -20,7 +20,10 @@
     db_name: "gvv"
     db_user: "root"
 
+
+# the jre is enough for agents but by using the same role it is easier to have the same version onmaster and agents
+
   roles:
     - phptools
     - gvv
-    - jre  
+    - jdk  

@@ -11,7 +11,7 @@ The required configuration steps are:
 
 I have some trouble with the ansible jenkins_job module. The Jenkins configuration as code plugin is not as trivial than presented and cannot install jenkins modules. I am looking for a simple solution with low learning curve and have a preference for DSL approach compared to XML edition or a complex API. If possible I'd prefer a unique tool for jenkins configuration and job creation instead of mixing ansible jenkins cli and jenkins plugins.
 
-## Jenkins user creation
+## The Jenkins user creation
 
 Currently done manually once jenkins is installed. A token has also been created using the GUI to use the jenkins CLI tool.
 
@@ -20,42 +20,7 @@ TODO: automate jenkins user creation
 TODO: automate jenkins user token creation
 
 
-## Tools comparison
-
-### Configuration as code
-
-pro: 
-- look promising
-- DSL approach
-
-cons: My first attempt resulted on an error with an angry red jenkins and not a single explanation ...
-
-### Ansible jenkins module
-
-pro: 
-look promising
-
-cons: 
-- XML editing for job creation
-
-### Jenkins CLI
-
-pro:
-- easy to use
-- support everything which is possible with jenkins
-
-cons:
-- Job creation by providing XML files
-
-### Jenkins DSL job plugin
-
-pro:
-- based on DSL
-
-cons:
-- you have to bootstrap
-
-## Jenkins CLI tools
+## Installing Jenkins modules using Jenkins CLI
 
 It is an easy to use tool:
 
@@ -82,4 +47,46 @@ java -jar jenkins-cli.jar -s http://ratus.flub78.net:8080/ -auth @jenkins_token 
 		
 java -jar jenkins-cli.jar -s http://ratus.flub78.net:8080/ -auth @jenkins_token list-jobs
 ```
+## Jenkinsfile
+
+Jenkinsfiles are managed in the project that they test. That way the Jenkins jobs can be kept really simple and generic and the logic of the pipeline are managed under CSM.
+
+## Agent Nodes
+
+For security reasons and for more efficient resource management the jobs are executed on several agents.
+
+Folowing this tutorial step by step I got it working
+
+	https://docs.cloudbees.com/docs/cloudbees-ci-kb/latest/client-and-managed-masters/how-to-connect-to-remote-ssh-agents
+
+
+## Others tools
+
+### Configuration as code
+
+pro: 
+- look promising
+- DSL approach
+
+cons: My first attempt resulted on an error with an angry red jenkins and not a single explanation ...
+
+### Ansible jenkins module
+
+pro: 
+look promising
+
+cons: 
+- XML editing for job creation
+
+### Jenkins DSL job plugin
+
+pro:
+- based on DSL
+
+cons:
+- you have to bootstrap
+
+## Jenkins CLI tools
+
+
 

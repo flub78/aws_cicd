@@ -1,0 +1,38 @@
+# user role
+#
+# create a linux user
+
+# =====================================================================================================
+
+  - name: Display context information
+    debug: 
+      msg:
+        - "user = {{ user_name }}"
+
+  - name: Add the user {{ user_name }}
+    ansible.builtin.user:
+      name: "{{ user_name }}"
+      shell: /bin/bash
+
+  - name: Creates .ssh directory for {{ user_name }}
+    file:
+      path: "/home/{{user_name}}/.ssh"
+      state: directory
+
+  - name: Copy ssh keys for {{ user_name }}
+    copy:
+      src: "files/{{ item }}"
+      dest: "/home/{{user_name}}/.ssh"
+    loop:
+      - authorized_keys
+      - jenkinsAgent_rsa
+      - jenkinsAgent_rsa.pub  
+
+  # - name: Log the installation state
+  #   lineinfile:
+  #     dest: /home/ubuntu/installed.txt
+  #     line: "{{ lookup('pipe', 'date') }} -> gvv installed"
+  #     state: present
+  #     insertafter: EOF
+  #     create: True
+

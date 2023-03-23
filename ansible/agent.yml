@@ -1,0 +1,27 @@
+---
+#
+# Prepare a jenkins agent
+#
+
+- name: Prerequisites for a Jenkins agent
+
+  gather_facts: true
+  hosts: "{{ lookup('env','INFRA_HOST') }}"
+
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  vars:
+    user_name: "jenkins"
+
+# the jre is enough for agents but by using the same role it is easier to have the same version onmaster and agents
+
+# TODO: create a jenkins user
+# 
+# TODO: install SSH key for jenkins user
+
+  roles:
+    #- phptools
+    #- jdk
+    - user  
