@@ -11,7 +11,7 @@ The principles of infrastructure as code: https://www.youtube.com/watch?v=POPP2W
 
 A control node to create an populate the infrastructure. It is typically a Linux machine, or a Windows Linux sub-system. 
 
-Software required on the control node:
+Software used on the control node:
 
 - [Terraform](doc/terraform.md)
 - [Ansible](doc/ansible.md)
@@ -27,7 +27,7 @@ Software required on the control node:
 - [Ansible Playbooks and Roles](doc/ansible.md)
 - [Jenkins](doc/jenkins.md)
 
-## Some external tutorials
+## External tutorials
 
 [Terraform Official Documentation](https://developer.hashicorp.com/terraform/docs)
 
@@ -42,11 +42,7 @@ Software required on the control node:
 
 [Jenkins command line reference](https://www.devopsschool.com/blog/jenkins-commands-lines-reference-from-jenkins/)
 
-
-
 [Ansible Jenkins Showcase](https://github.com/Azulinho/ansible-jenkins-showcase)
-
-
 
 ## Videos
 
@@ -55,7 +51,3 @@ Software required on the control node:
 [Tutorials et Formation Terraform](https://www.youtube.com/playlist?list=PLn6POgpklwWrpWnv05paAdqbFbV6gApHx)
 
 [Formation Ansible](https://www.youtube.com/playlist?list=PLn6POgpklwWoCpLKOSw3mXCqbRocnhrh-)
-
-
-
-
