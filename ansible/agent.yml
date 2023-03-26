@@ -22,6 +22,7 @@
 # TODO: install SSH key for jenkins user
 
   roles:
-    #- phptools
-    #- jdk
-    - user  
+    - phptools
+    - jdk
+    - user
+    - ansible  
