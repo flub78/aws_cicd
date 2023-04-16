@@ -12,6 +12,7 @@
   vars:
     php_version : 8.1
     # php_version: 7.4
+    # a secret used by phpmyadmin
     blowfish_secret: "{{ lookup('blowfish_secret', '/dev/null length=32 chars=ascii_letters,digits') }}"
 
   roles:

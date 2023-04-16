@@ -1,0 +1,88 @@
+---
+# ---------------------------------------------------------------------------------
+# Install ruby and watir
+#
+# wget -O ruby-install-0.8.1.tar.gz https://github.com/postmodern/ruby-install/archive/v0.8.1.tar.gz
+# tar -xzvf ruby-install-0.8.1.tar.gz
+# cd ruby-install-0.8.1/
+# sudo make install
+# ruby-install ruby 3.0.0
+#
+# apt install ruby
+# apt install ruby-dev
+# gem install watir
+# gem install minitest
+# gem install minitest-ci
+# gem install headless
+# gem install mysql2
+# gem install selenium-webdriver
+# ---------------------------------------------------------------------------------
+
+- name: Check if Ruby is installed
+  command: which ruby
+  register: ruby_check
+  ignore_errors: yes
+
+- block:
+  - name: Update the system
+    apt: update_cache=true
+
+  - name: Install dependencies for Ruby 2.3.3
+    apt: name={{ item }} state=installed
+    with_items:
+      - build-essential
+      - automake
+      - autoconf
+      - libyaml-dev
+      - libxml2-dev
+      - libxslt-dev
+      - libc6-dev
+      - ncurses-dev
+      - libtool
+      - bison
+
+    - name: Create a building folder
+      file:
+        path:  /tmp/build_ruby
+        state: directory
+        mode: 'u+rwx'
+
+    - name: Download Ruby 2.3.3
+      get_url:
+        url: https://cache.ruby-lang.org/pub/ruby/2.3/ruby-2.3.3.tar.gz
+        url: https://github.com/postmodern/ruby-install/archive/v0.8.1.tar.gz
+        dest: /tmp/build_ruby/ruby-2.3.3.tar.gz
+
+    - name: Unpack Ruby
+      unarchive:
+        src: /tmp/build_ruby/ruby-2.3.3.tar.gz
+        dest: /tmp/build_ruby/
+        remote_src: yes
+
+    - name: Build Ruby
+      command: >
+        {{ item }}
+        chdir=/tmp/build_ruby/ruby-2.3.3
+        creates=/usr/local/bin/ruby
+      with_items:
+        - ./configure --enable-shared
+        - make
+        - make install
+
+    - name: Add Ruby symlinks
+      file:
+          dest: "/usr/bin/{{ item }}"
+          state: link
+          force: yes
+      with_items:
+        - erb
+        - gem
+        - irb
+        - rake
+        - rdoc
+    
+    - name: Remove the building folder
+      file:
+        path:  /tmp/build_ruby
+        state: absent
+    when: ruby_check.rc != 0
