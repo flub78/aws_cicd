@@ -2,7 +2,6 @@
 #
 # Install GVV on a LAMP server
 #
-# TODO: move these specific playbook and roles into the project itself 
 #
 
 - name: Installing GVV

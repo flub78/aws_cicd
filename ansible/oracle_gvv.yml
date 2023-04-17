@@ -1,0 +1,37 @@
+---
+#
+# Install GVV on an Oracle virtual machine.
+#
+# Apache, mysql, phpmyadmin and a virtual host are already installed on the same machine.
+#
+# The virtual host is configured to use the php version 7.4.
+# https://www.digitalocean.com/community/tutorials/how-to-run-multiple-php-versions-on-one-server-using-apache-and-php-fpm-on-ubuntu-20-04
+#
+
+- name: Installing GVV
+
+  gather_facts: true
+  hosts: "{{ lookup('env','ANSIBLE_HOST') }}"
+
+  become: yes
+  become_method: sudo
+  become_user: root
+
+  vars:
+    app_domain: "{{ lookup('env','APP_DOMAIN') }}"
+    base_url: "{{ lookup('env','BASE_URL') }}"
+    installation_path: "{{ lookup('env','INSTALLATION_PATH') }}"
+
+    db_name: "gvv"
+    db_user: "root"
+
+    php_version: 7.4
+
+# the jre is enough for agents but by using the same role it is easier to have the same version onmaster and agents
+
+  roles:
+    # - php
+    # - phptools
+    - gvv_nodb
+    # - jdk
+    #- watir  

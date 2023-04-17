@@ -1,0 +1,128 @@
+# phpmyadmin role
+#
+# Install and configure gvv
+
+# =====================================================================================================
+
+  - name: Display context information
+    debug: 
+      msg:
+        - "GVV installation"
+        - "BASE_URL = {{ base_url }}"
+        - "INSTALLATION_PATH = {{ installation_path }}"
+
+  - name: install subversion
+    apt: name=subversion state=present
+
+  - name: delete the installation directory if it exists
+    file: 
+      path: "{{ installation_path }}" 
+      state: absent
+
+  - name: get the sources from subversion
+    subversion: 
+      repo: http://subversion.developpez.com/projets/gvv/trunk/gvv
+      dest: "{{ installation_path }}"
+
+
+  # edit gvv/application/config/config.php
+  # set the domain name in application/config/config.php
+  - name:  base url in config/config.php
+    lineinfile:
+      dest:  '{{installation_path}}/application/config/config.php'
+      regexp: 'base_url'
+      line: "$config['base_url']     = '{{base_url}}';"
+
+  # setup user in application/config/database
+  - name: setup config/database.php
+    lineinfile:
+       dest:  '{{installation_path}}/application/config/database.php'
+       regexp: 'gvv_user'
+       line: "$db['default']['username'] = '{{db_user}}';"
+
+  # setup password in application/config/database
+  - name:  setup config/database.php
+    lineinfile:
+       dest:  '{{installation_path}}/application/config/database.php'
+       regexp: 'lfoyfgbj'
+       line: "$db['default']['password'] = '{{database_password }}';"
+
+  # setup database in application/config/database
+  - name:  setup config/database.php
+    lineinfile:
+       dest:  '{{installation_path}}/application/config/database.php'
+       regexp: 'gvv2'
+       line: "$db['default']['database'] = '{{db_name}}';"
+
+  # a few configuration changes
+  - name: setup config/club.php
+    lineinfile:
+       dest:  '{{installation_path}}/application/config/club.php'
+       regexp: 'palette'
+       line: "$config['palette'] = 'base';"
+
+  # set permissions on the files
+  - name: Ensure directories are 0755
+    command: find {{ installation_path }} -type d -exec chmod 0755 {} \;
+
+  - name: Ensure files are 0644
+    command: find {{ installation_path }} -type f -exec chmod 0644 {} \;
+
+  # writable files
+  - name: Ensure file is writable
+    command: chmod a+w "{{ installation_path }}/application/config/{{item}}.php"
+    with_items:
+      - club
+      - facturation
+      - config
+
+  # writable directories
+  - name: make some directories writable
+    file:
+      path: "{{ installation_path }}/uploads"
+      state: directory
+      mode: 0777
+      recurse: yes
+
+  - name: make some directories writable
+    file:
+      path: "{{ installation_path }}/uploads/restore"
+      state: directory
+      mode: 0777
+      recurse: yes
+
+  - name: make some directories writable
+    file:
+      path: "{{ installation_path }}/assets"
+      state: directory
+      mode: 0777
+      recurse: yes
+
+  - name: make writable
+    file:
+      path: "{{ installation_path }}/application/logs"
+      state: directory
+      mode: 0777
+      recurse: yes
+              
+  - name: make some files executable
+    file:
+      path: "{{ installation_path }}/watir/{{item}}"
+      mode: 0744
+    with_items:
+      - runall.sh
+      - cleanup.sh
+
+  - name: Display installation url
+    debug: 
+      msg:
+        - "Installation URL = {{ base_url }}/install//"
+
+  - name: Log the installation state
+    lineinfile:
+      dest: /home/ubuntu/installed.txt
+      line: "{{ lookup('pipe', 'date') }} -> gvv installed"
+      state: present
+      insertafter: EOF
+      create: True
+
