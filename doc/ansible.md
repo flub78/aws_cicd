@@ -65,9 +65,17 @@ The ansible vault password can be store in a file
 
     ansible-playbook --vault-password-file "~/.ssh/ansible_vault_key" aws_dev_server.yml
 
+## Variable organization
+
+The objective of this project is to provide roles that can be reused to provision infrastructure.
+
+So an infrastructure is defined by a set of variables (environment variables) and once defined the playbooks can be run.
+
+
+
 ## Ansible Playbooks Description
 
-- test_connection.ym -	test ansible access to a node
+- test_connection.yml -	test ansible access to a node
 - lamp.yml -				install Apache, MySQL and PHP
 - jenkins.yml -			install jenkins
 - jenkins_jobs_multi -	Create the jobs for the multitenant project

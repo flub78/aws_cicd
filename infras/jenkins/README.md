@@ -12,4 +12,5 @@ If you need to change the server name or domain edit the terraform.tfvars ans in
     
     ssh -i $TF_VAR_PRIVATE_KEY ubuntu@jenkins.flub78.net
 
+    jenkins server:
     http://jenkins.flub78.net:8080/
