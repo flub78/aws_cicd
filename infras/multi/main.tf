@@ -77,7 +77,7 @@ resource "local_file" "hosts"{
 resource "local_file" "ansible_setenv"{
   filename = "ansible.setenv"
   content = <<-EOF
-  export INFRA_HOST=${var.subdomain}
+  export ANSIBLE_HOST=${var.subdomain}
   export INFRA_DOMAIN="${var.subdomain}.${var.domain}"
   EOF
 }

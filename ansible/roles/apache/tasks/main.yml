@@ -32,7 +32,7 @@
 
     - name: Set a hostname
       ansible.builtin.hostname:
-        name:  "tf-{{ lookup('env','INFRA_HOST') }}" 
+        name:  "tf-{{ lookup('env','ANSIBLE_HOST') }}" 
 
     - name: check that the server can be reached
       uri:

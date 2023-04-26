@@ -3,7 +3,7 @@
 - name: Installing a LAMP server
 
   gather_facts: true
-  hosts: "{{ lookup('env','INFRA_HOST') }}"
+  hosts: "{{ lookup('env','ANSIBLE_HOST') }}"
 
   become: yes
   become_method: sudo
